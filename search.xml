@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>SpringBoot3--&gt;springBoot2</title>
+      <link href="/2024/08/15/%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%9A%84/"/>
+      <url>/2024/08/15/%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%9A%84/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-mybatis-plus依赖"><a href="#1-mybatis-plus依赖" class="headerlink" title="1.mybatis-plus依赖"></a>1.mybatis-plus依赖</h2><p>C:\Users\mpk16\Downloads\apartment-system\src\main\java\com\one\apartmentsystem\ApartmentSystemApplication.java:3:37</p><p>java: 无法访问org.mybatis.spring.annotation.MapperScan<br>  错误的类文件: &#x2F;E:&#x2F;Maven&#x2F;apache-maven-3.9.4-bin&#x2F;apache-maven-3.9.4&#x2F;repo&#x2F;org&#x2F;mybatis&#x2F;mybatis-spring&#x2F;3.0.3&#x2F;mybatis-spring-3.0.3.jar!&#x2F;org&#x2F;mybatis&#x2F;spring&#x2F;annotation&#x2F;MapperScan.class<br>    类文件具有错误的版本 61.0, 应为 52.0<br>    请删除该文件或确保该文件位于正确的类路径子目录中。</p><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">将<span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-spring-boot3-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">改为</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="2-tomcat依赖"><a href="#2-tomcat依赖" class="headerlink" title="2.tomcat依赖"></a>2.tomcat依赖</h2><p>java: 无法访问jakarta.servlet.http.HttpSession<br>  错误的类文件: &#x2F;E:&#x2F;Maven&#x2F;apache-maven-3.9.4-bin&#x2F;apache-maven-3.9.4&#x2F;repo&#x2F;org&#x2F;apache&#x2F;tomcat&#x2F;embed&#x2F;tomcat-embed-core&#x2F;10.1.26&#x2F;tomcat-embed-core-10.1.26.jar!&#x2F;jakarta&#x2F;servlet&#x2F;http&#x2F;HttpSession.class<br>    类文件具有错误的版本 55.0, 应为 52.0<br>    请删除该文件或确保该文件位于正确的类路径子目录中。</p><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">删除依赖</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>    </span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.embed<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat-embed-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>   </span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>10.1.26<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="3-MockMultipartFile"><a href="#3-MockMultipartFile" class="headerlink" title="3.MockMultipartFile"></a>3.MockMultipartFile</h2><p>java: 无法访问org.springframework.mock.web.MockMultipartFile<br>  错误的类文件: &#x2F;E:&#x2F;Maven&#x2F;apache-maven-3.9.4-bin&#x2F;apache-maven-3.9.4&#x2F;repo&#x2F;org&#x2F;springframework&#x2F;spring-test&#x2F;6.1.11&#x2F;spring-test-6.1.11.jar!&#x2F;org&#x2F;springframework&#x2F;mock&#x2F;web&#x2F;MockMultipartFile.class<br>    类文件具有错误的版本 61.0, 应为 52.0<br>    请删除该文件或确保该文件位于正确的类路径子目录中。</p><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>    </span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>6.1.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>    </span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="4-lombok"><a href="#4-lombok" class="headerlink" title="4.lombok"></a>4.lombok</h2><p>Class com.sun.tools.javac.tree.JCTree$JCImport does not have member field ‘com.sun.tools.javac.tree.JCTree qualid’</p><p>打包时出现问题</p><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>   </span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>   </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><p><img src="/../images/A.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spring-boot </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SpringBoot自动配置原理</title>
       <link href="/2024/08/14/SpringBootB/"/>
       <url>/2024/08/14/SpringBootB/</url>
@@ -377,9 +402,9 @@
       
         <tags>
             
-            <tag> study </tag>
-            
             <tag> AOP </tag>
+            
+            <tag> study </tag>
             
             <tag> SpringBoot </tag>
             
@@ -431,9 +456,9 @@
       
         <tags>
             
-            <tag> AOP </tag>
-            
             <tag> spring </tag>
+            
+            <tag> AOP </tag>
             
             <tag> 事务管理 </tag>
             
