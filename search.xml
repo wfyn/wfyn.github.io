@@ -33,6 +33,33 @@
     
     
     <entry>
+      <title>uniapp微信小程序整合腾讯地图</title>
+      <link href="/2024/08/29/uniapp%E6%95%B4%E5%90%88%E8%85%BE%E8%AE%AF%E5%9C%B0%E5%9B%BE/"/>
+      <url>/2024/08/29/uniapp%E6%95%B4%E5%90%88%E8%85%BE%E8%AE%AF%E5%9C%B0%E5%9B%BE/</url>
+      
+        <content type="html"><![CDATA[<p>1.进入</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> uniapp </tag>
+            
+            <tag> 腾讯地图 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SpringBoot整合poi实现对文档编辑并转为pdf</title>
       <link href="/2024/08/29/spring%E6%95%B4%E5%90%88poi/"/>
       <url>/2024/08/29/spring%E6%95%B4%E5%90%88poi/</url>
@@ -539,9 +566,9 @@
       
         <tags>
             
-            <tag> AOP </tag>
-            
             <tag> study </tag>
+            
+            <tag> AOP </tag>
             
             <tag> SpringBoot </tag>
             
@@ -593,9 +620,9 @@
       
         <tags>
             
-            <tag> spring </tag>
-            
             <tag> AOP </tag>
+            
+            <tag> spring </tag>
             
             <tag> 事务管理 </tag>
             
