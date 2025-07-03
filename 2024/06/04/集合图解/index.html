@@ -1,0 +1,361 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>集合图解 | 轨迹</title><meta name="author" content="马朋坤"><meta name="copyright" content="马朋坤"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.List图解  ArrayList： 优势： 随机访问速度快：由于 ArrayList 基于数组实现，可以通过索引进行快速随机访问。 内存占用较小：相对于 LinkedList 和 Vector，ArrayList 内存占用较小，因为它不会维护额外的链表结构或同步开销。   适用场景： 当需要快速随机访问元素时，特别是按索引查找元素时，ArrayList 是一个很好的选择。 当元素数量相对稳定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集合图解">
+<meta property="og:url" content="https://wfyn.github.io/2024/06/04/%E9%9B%86%E5%90%88%E5%9B%BE%E8%A7%A3/index.html">
+<meta property="og:site_name" content="轨迹">
+<meta property="og:description" content="1.List图解  ArrayList： 优势： 随机访问速度快：由于 ArrayList 基于数组实现，可以通过索引进行快速随机访问。 内存占用较小：相对于 LinkedList 和 Vector，ArrayList 内存占用较小，因为它不会维护额外的链表结构或同步开销。   适用场景： 当需要快速随机访问元素时，特别是按索引查找元素时，ArrayList 是一个很好的选择。 当元素数量相对稳定">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wfyn.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2024-06-04T03:46:46.000Z">
+<meta property="article:modified_time" content="2024-06-04T05:47:33.000Z">
+<meta property="article:author" content="马朋坤">
+<meta property="article:tag" content="List">
+<meta property="article:tag" content="Set">
+<meta property="article:tag" content="Map">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wfyn.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wfyn.github.io/2024/06/04/%E9%9B%86%E5%90%88%E5%9B%BE%E8%A7%A3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: ,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '集合图解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-06-04 13:47:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/bg7.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="轨迹"><span class="site-name">轨迹</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">集合图解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-04T03:46:46.000Z" title="发表于 2024-06-04 11:46:46">2024-06-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-04T05:47:33.000Z" title="更新于 2024-06-04 13:47:33">2024-06-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java/">java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="集合图解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="1-List图解"><a href="#1-List图解" class="headerlink" title="1.List图解"></a>1.List图解</h3><p><img src="/../images/ArrayList.png"></p>
+<ol>
+<li><strong>ArrayList</strong>：<ul>
+<li>优势：<ul>
+<li>随机访问速度快：由于 <code>ArrayList</code> 基于数组实现，可以通过索引进行快速随机访问。</li>
+<li>内存占用较小：相对于 <code>LinkedList</code> 和 <code>Vector</code>，<code>ArrayList</code> 内存占用较小，因为它不会维护额外的链表结构或同步开销。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要快速随机访问元素时，特别是按索引查找元素时，<code>ArrayList</code> 是一个很好的选择。</li>
+<li>当元素数量相对稳定，不需要频繁进行插入和删除操作时，<code>ArrayList</code> 效率较高。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>LinkedList</strong>：<ul>
+<li>优势：<ul>
+<li>插入和删除操作高效：由于 <code>LinkedList</code> 基于链表实现，插入和删除操作的时间复杂度为 O(1)。</li>
+<li>内存动态分配：<code>LinkedList</code> 在插入和删除元素时不需要重新分配内存，因此在频繁插入和删除元素的情况下，性能可能优于 <code>ArrayList</code>。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要频繁进行插入和删除操作时，尤其是在集合的中间位置进行操作时，<code>LinkedList</code> 是一个不错的选择。</li>
+<li>当对内存占用不那么敏感，而对于插入和删除操作的效率要求较高时，可以考虑使用 <code>LinkedList</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Vector</strong>：<ul>
+<li>优势：<ul>
+<li>线程安全：<code>Vector</code> 是线程安全的，支持并发访问，所有公共方法都被 synchronized 修饰。</li>
+<li>可增长的数组：与 <code>ArrayList</code> 类似，<code>Vector</code> 也是基于数组实现的，并且支持动态增长。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要在多线程环境下进行操作时，<code>Vector</code> 可以确保线程安全，适合于并发访问的场景。</li>
+<li>尽管 <code>Vector</code> 在现代 Java 中不太常用，但如果你需要一个线程安全的动态数组，可以考虑使用 <code>Vector</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>CopyOnWriteArrayList</strong>：<ul>
+<li>优势：<ul>
+<li>线程安全且高效的迭代：<code>CopyOnWriteArrayList</code> 是线程安全的，它通过复制原数组来实现并发更新，因此对迭代操作非常高效。</li>
+<li>适用于读多写少的场景：由于写操作会复制整个数组，因此适用于写少、读多的场景。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要在读多写少的场景下保证线程安全且高效的迭代时，<code>CopyOnWriteArrayList</code> 是一个很好的选择。</li>
+<li>例如，可以用于观察者模式中，当需要多个观察者同时观察一个对象，并且观察者只读取对象状态而不修改时。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-Set图解"><a href="#2-Set图解" class="headerlink" title="2.Set图解"></a>2.Set图解</h3><p><img src="/../images/HashSet.png"></p>
+<ol>
+<li><strong>HashSet</strong>：<ul>
+<li>优势：<ul>
+<li>快速查找：<code>HashSet</code> 基于哈希表实现，具有快速的查找性能，平均时间复杂度为 O(1)。</li>
+<li>不允许重复元素：<code>HashSet</code> 不允许集合中存在重复元素，保证了元素的唯一性。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要快速查找元素，并且不关心元素的顺序时，<code>HashSet</code> 是一个很好的选择。</li>
+<li>适合于需要去重的场景，例如在构建索引、缓存或者判断元素是否存在时使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>TreeSet</strong>：<ul>
+<li>优势：<ul>
+<li>有序性：<code>TreeSet</code> 基于红黑树实现，可以保证元素按照自然顺序或者指定的比较器顺序排序。</li>
+<li>支持范围查找：<code>TreeSet</code> 支持范围查询操作，例如 <code>subSet()</code>, <code>headSet()</code>, <code>tailSet()</code> 等。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要保持元素有序，并且进行范围查询操作时，<code>TreeSet</code> 是一个很好的选择。</li>
+<li>适合于需要按照一定顺序遍历集合中元素的场景，例如需要按照字母顺序或者数值大小顺序进行遍历。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>LinkedHashSet</strong>：<ul>
+<li>优势：<ul>
+<li>有序性和快速访问：<code>LinkedHashSet</code> 同时具有 <code>HashSet</code> 的快速查找特性和 <code>LinkedHashMap</code> 的有序性，内部使用链表维护插入顺序。</li>
+<li>迭代顺序可预测：遍历 <code>LinkedHashSet</code> 时，元素的顺序与插入顺序一致。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要保持元素的插入顺序，并且快速访问元素时，<code>LinkedHashSet</code> 是一个很好的选择。</li>
+<li>适合于需要维护元素插入顺序的场景，例如LRU缓存算法中。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>CopyOnWriteArraySet</strong>：<ul>
+<li>优势：<ul>
+<li>线程安全：<code>CopyOnWriteArraySet</code> 是线程安全的，通过复制原数组来实现并发更新，支持高效的读操作。</li>
+<li>适用于读多写少的场景：对集合进行写操作时，会复制整个数组，因此适用于读多写少的场景。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要在读多写少的场景下保证线程安全，并且需要高效的读操作时，<code>CopyOnWriteArraySet</code> 是一个很好的选择。</li>
+<li>例如，用于缓存、事件监听器集合等需要多线程安全的场景。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-Map图解"><a href="#3-Map图解" class="headerlink" title="3.Map图解"></a>3.Map图解</h3><p><img src="/../images/HashMap.png"></p>
+<ol>
+<li><strong>TreeMap</strong>：<ul>
+<li>优势：<ul>
+<li>有序性：<code>TreeMap</code> 基于红黑树实现，可以保持键的有序性，这使得它适用于需要按照键的顺序进行遍历和操作的场景。</li>
+<li>支持范围查询：<code>TreeMap</code> 支持范围查询操作，例如 <code>subMap()</code>, <code>headMap()</code>, <code>tailMap()</code> 等。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要按照键的自然顺序或者指定的比较器顺序对键进行排序，并且进行范围查询操作时，<code>TreeMap</code> 是一个很好的选择。</li>
+<li>适合于需要有序遍历键值对的场景，例如按照字母顺序或者数值大小顺序进行遍历。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>HashMap</strong>：<ul>
+<li>优势：<ul>
+<li>高性能：<code>HashMap</code> 基于哈希表实现，具有快速的插入、删除和查找操作，平均时间复杂度为 O(1)。</li>
+<li>可变大小：<code>HashMap</code> 不限制容量，可以根据需要动态调整大小。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要快速插入、删除和查找键值对，并且不需要保持任何顺序时，<code>HashMap</code> 是一个很好的选择。</li>
+<li>适合于需要高性能的哈希映射的场景，例如缓存、索引等。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>LinkedHashMap</strong>：<ul>
+<li>优势：<ul>
+<li>有序性：<code>LinkedHashMap</code> 继承自 <code>HashMap</code>，但内部使用链表维护插入顺序，因此可以保持插入顺序。</li>
+<li>迭代顺序可预测：遍历 <code>LinkedHashMap</code> 时，键值对的顺序与插入顺序一致。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要保持键值对的插入顺序时，<code>LinkedHashMap</code> 是一个很好的选择。</li>
+<li>适合于需要按照元素插入顺序遍历键值对的场景，例如LRU缓存算法中。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>ConcurrentHashMap</strong>：<ul>
+<li>优势：<ul>
+<li>线程安全：<code>ConcurrentHashMap</code> 是线程安全的哈希映射，支持并发访问而不需要额外的同步措施。</li>
+<li>高性能：<code>ConcurrentHashMap</code> 通过分段锁机制实现高效的并发更新，可以同时支持多个写操作和多个读操作。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要在多线程环境下安全地进行并发访问和更新操作时，<code>ConcurrentHashMap</code> 是一个很好的选择。</li>
+<li>适合于需要高并发性能和线程安全的场景，例如并发缓存、并行计算等。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Hashtable</strong>：<ul>
+<li>优势：<ul>
+<li>线程安全：<code>Hashtable</code> 是线程安全的哈希映射，所有公共方法都是同步的，支持多线程并发访问。</li>
+<li>可靠性：由于所有的方法都是同步的，<code>Hashtable</code> 在多线程环境下可以提供可靠的线程安全性。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要在多线程环境下安全地进行并发访问和更新操作，并且需要保证线程安全性和可靠性时，<code>Hashtable</code> 是一个选择。</li>
+<li>然而，由于其同步开销较高，一般情况下 <code>ConcurrentHashMap</code> 更常被选择。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Properties</strong>：<ul>
+<li>优势：<ul>
+<li>用于处理属性文件：<code>Properties</code> 是一个专门用来处理属性文件（key-value对）的集合类，通常用于配置文件的读取和写入。</li>
+<li>字符串类型：<code>Properties</code> 的键和值都是字符串类型，适合于存储简单的配置信息。</li>
+</ul>
+</li>
+<li>适用场景：<ul>
+<li>当需要读取或者写入配置文件时，特别是简单的键值对配置信息时，<code>Properties</code> 是一个很好的选择。</li>
+<li>适合于处理简单的文本配置文件，例如应用程序的配置信息、国际化资源文件等。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://wfyn.github.io">马朋坤</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://wfyn.github.io/2024/06/04/%E9%9B%86%E5%90%88%E5%9B%BE%E8%A7%A3/">https://wfyn.github.io/2024/06/04/集合图解/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wfyn.github.io" target="_blank">轨迹</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/List/">List</a><a class="post-meta__tags" href="/tags/Set/">Set</a><a class="post-meta__tags" href="/tags/Map/">Map</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/05/3.JavaSE%E9%AB%98%E7%BA%A7%20Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F&amp;Stream%E6%B5%81&amp;%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" title="Lambda表达式、方法引用、Stream流"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Lambda表达式、方法引用、Stream流</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/02/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux 常用命令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Linux 常用命令</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">马朋坤</div><div class="author-info__description">有多少爱可以重来</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wfyn"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wfyn" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1613828539@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站点与2023年9月17日开始建造,并在逐渐完善中...</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/03/SpringBoot%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" title="springboot异常处理">springboot异常处理</a><time datetime="2025-07-03T13:36:53.528Z" title="发表于 2025-07-03 21:36:53">2025-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/01/SpringBoot%E6%95%B4%E5%90%88%E7%99%BE%E5%BA%A6%E4%BA%91%E8%BA%AB%E4%BB%BD%E8%AF%86%E5%88%AB/" title="springboot整合百度云身份识别">springboot整合百度云身份识别</a><time datetime="2024-09-01T15:28:28.000Z" title="发表于 2024-09-01 23:28:28">2024-09-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/uniapp%E6%95%B4%E5%90%88%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E7%9F%A2%E9%87%8F%E5%9B%BE%E6%A0%87/" title="uniapp整合阿里巴巴矢量图标库">uniapp整合阿里巴巴矢量图标库</a><time datetime="2024-08-29T13:44:04.000Z" title="发表于 2024-08-29 21:44:04">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/spring%E6%95%B4%E5%90%88poi/" title="SpringBoot整合poi实现对文档编辑并转为pdf">SpringBoot整合poi实现对文档编辑并转为pdf</a><time datetime="2024-08-29T13:10:05.000Z" title="发表于 2024-08-29 21:10:05">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/26/%E9%98%BF%E9%87%8COSS/" title="阿里云OSS">阿里云OSS</a><time datetime="2024-08-26T14:49:16.000Z" title="发表于 2024-08-26 22:49:16">2024-08-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/images/bg7.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By 马朋坤</div><div class="footer_custom_text">彼此交换喜悲,爱的多的人总先掉眼泪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

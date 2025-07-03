@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>阿里云OSS | 轨迹</title><meta name="author" content="马朋坤"><meta name="copyright" content="马朋坤"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="阿里云 OSS1. 进入官网访问阿里云官方网站以获取更多信息和资源：阿里云官网 2. 注册阿里账号并进行实名认证在官网上注册账号，并完成实名认证以获得阿里云服务的访问权限。 3. 查看 API 文档查看阿里云 OSS 的 API 文档以了解详细的使用方法和接口信息：OSS 快速入门 4. 控制台操作流程查看详细的控制台操作流程：控制台快速入门 4.1 开通 OSS 服务在阿里云控制台中开通 OSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里云OSS">
+<meta property="og:url" content="https://wfyn.github.io/2024/08/26/%E9%98%BF%E9%87%8COSS/index.html">
+<meta property="og:site_name" content="轨迹">
+<meta property="og:description" content="阿里云 OSS1. 进入官网访问阿里云官方网站以获取更多信息和资源：阿里云官网 2. 注册阿里账号并进行实名认证在官网上注册账号，并完成实名认证以获得阿里云服务的访问权限。 3. 查看 API 文档查看阿里云 OSS 的 API 文档以了解详细的使用方法和接口信息：OSS 快速入门 4. 控制台操作流程查看详细的控制台操作流程：控制台快速入门 4.1 开通 OSS 服务在阿里云控制台中开通 OSS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wfyn.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2024-08-26T14:49:16.000Z">
+<meta property="article:modified_time" content="2024-08-29T13:42:58.000Z">
+<meta property="article:author" content="马朋坤">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="第三方接口">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wfyn.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wfyn.github.io/2024/08/26/%E9%98%BF%E9%87%8COSS/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: ,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '阿里云OSS',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-08-29 21:42:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/bg2.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="轨迹"><span class="site-name">轨迹</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">阿里云OSS</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-26T14:49:16.000Z" title="发表于 2024-08-26 22:49:16">2024-08-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-29T13:42:58.000Z" title="更新于 2024-08-29 21:42:58">2024-08-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java/">java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="阿里云OSS"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="阿里云-OSS"><a href="#阿里云-OSS" class="headerlink" title="阿里云 OSS"></a>阿里云 OSS</h2><h3 id="1-进入官网"><a href="#1-进入官网" class="headerlink" title="1. 进入官网"></a>1. 进入官网</h3><p>访问阿里云官方网站以获取更多信息和资源：<a target="_blank" rel="noopener" href="https://cn.aliyun.com/">阿里云官网</a></p>
+<h3 id="2-注册阿里账号并进行实名认证"><a href="#2-注册阿里账号并进行实名认证" class="headerlink" title="2. 注册阿里账号并进行实名认证"></a>2. 注册阿里账号并进行实名认证</h3><p>在官网上注册账号，并完成实名认证以获得阿里云服务的访问权限。</p>
+<h3 id="3-查看-API-文档"><a href="#3-查看-API-文档" class="headerlink" title="3. 查看 API 文档"></a>3. 查看 API 文档</h3><p>查看阿里云 OSS 的 API 文档以了解详细的使用方法和接口信息：<a target="_blank" rel="noopener" href="https://help.aliyun.com/zh/oss/getting-started/getting-started-with-oss?spm=a2c4g.11186623.0.0.3a1197f0kBdrpT#section-0bb-c7c-qsn">OSS 快速入门</a></p>
+<h3 id="4-控制台操作流程"><a href="#4-控制台操作流程" class="headerlink" title="4. 控制台操作流程"></a>4. 控制台操作流程</h3><p>查看详细的控制台操作流程：<a target="_blank" rel="noopener" href="https://help.aliyun.com/zh/oss/getting-started/console-quick-start?spm=a2c4g.11186623.0.0.43f123bfXADCbw">控制台快速入门</a></p>
+<h4 id="4-1-开通-OSS-服务"><a href="#4-1-开通-OSS-服务" class="headerlink" title="4.1 开通 OSS 服务"></a>4.1 开通 OSS 服务</h4><p>在阿里云控制台中开通 OSS 服务。</p>
+<p><img src="/../images/image-20240821135754161.png" alt="image-20240821135754161"></p>
+<h4 id="4-2-创建存储空间"><a href="#4-2-创建存储空间" class="headerlink" title="4.2 创建存储空间"></a>4.2 创建存储空间</h4><p>在 OSS 控制台中创建存储空间（Bucket）。</p>
+<p><img src="/../images/image-20240821135823281.png" alt="image-20240821135823281"></p>
+<p><img src="/../images/image-20240821135857614.png" alt="image-20240821135857614"></p>
+<h4 id="4-3-上传文件"><a href="#4-3-上传文件" class="headerlink" title="4.3 上传文件"></a>4.3 上传文件</h4><p>使用 OSS 控制台上传文件到创建的存储空间。</p>
+<p><img src="/../images/image-20240821140010020.png" alt="image-20240821140010020"></p>
+<p><img src="/../images/image-20240821140048790.png" alt="image-20240821140048790"></p>
+<h3 id="5-使用-Java-SDK-操作流程"><a href="#5-使用-Java-SDK-操作流程" class="headerlink" title="5. 使用 Java SDK 操作流程"></a>5. 使用 Java SDK 操作流程</h3><h4 id="5-1-安装-SDK"><a href="#5-1-安装-SDK" class="headerlink" title="5.1 安装 SDK"></a>5.1 安装 SDK</h4><p>从阿里云官方网站下载并安装 Java SDK。</p>
+<p>在Maven工程中使用OSS Java SDK，只需在pom.xml中加入相应依赖即可。以在<dependencies>中加入3.17.4版本的依赖为例：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.aliyun.oss<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aliyun-sdk-oss<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.17.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果使用的是Java 9及以上的版本，则需要添加JAXB相关依赖。添加JAXB相关依赖示例代码如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.xml.bind<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxb-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.activation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>activation<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- no more than 2.3.3--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.glassfish.jaxb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxb-runtime<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-2-配置访问凭证"><a href="#5-2-配置访问凭证" class="headerlink" title="5.2 配置访问凭证"></a>5.2 配置访问凭证</h4><h5 id="5-2-1-创建用户"><a href="#5-2-1-创建用户" class="headerlink" title="5.2.1 创建用户"></a>5.2.1 创建用户</h5><p>在控制台中创建用户，并为用户分配相应的权限。</p>
+<p><img src="/../images/image-20240821140127124.png" alt="image-20240821140127124"></p>
+<p><img src="/../images/image-20240821140609284.png" alt="image-20240821140609284"></p>
+<p><img src="/../images/image-20240821140502090.png" alt="image-20240821140502090"></p>
+<p><img src="/../images/image-20240821140644817.png" alt="image-20240821140644817"></p>
+<h5 id="5-2-2-创建-ACCESS-KEY"><a href="#5-2-2-创建-ACCESS-KEY" class="headerlink" title="5.2.2 创建 ACCESS_KEY"></a>5.2.2 创建 ACCESS_KEY</h5><p>为用户生成 ACCESS_KEY，用于访问 OSS 服务。</p>
+<p><img src="/../images/image-20240821140711652.png" alt="image-20240821140711652"></p>
+<p><img src="/../images/image-20240821140828601.png" alt="image-20240821140828601"></p>
+<h5 id="5-2-3-配置环境变量"><a href="#5-2-3-配置环境变量" class="headerlink" title="5.2.3 配置环境变量"></a>5.2.3 配置环境变量</h5><p>设置环境变量以方便在代码中使用 ACCESS_KEY：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">setx OSS_ACCESS_KEY_ID &lt;ALIBABA_CLOUD_ACCESS_KEY_ID&gt;</span><br><span class="line">setx OSS_ACCESS_KEY_SECRET &lt;ALIBABA_CLOUD_ACCESS_KEY_SECRET&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-2-4-测试环境变量"><a href="#5-2-4-测试环境变量" class="headerlink" title="5.2.4 测试环境变量"></a>5.2.4 测试环境变量</h5><p>通过以下 Java 代码测试环境变量是否设置成功：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestEnv</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(System.getenv(<span class="string">&quot;OSS_ACCESS_KEY_ID&quot;</span>));</span><br><span class="line">        System.out.println(System.getenv(<span class="string">&quot;OSS_ACCESS_KEY_SECRET&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-2-5-测试代码"><a href="#5-2-5-测试代码" class="headerlink" title="5.2.5 测试代码"></a>5.2.5 测试代码</h4><p>以下是一个使用 Java SDK 访问 OSS 的示例代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.aliyun.oss.ClientException;</span><br><span class="line"><span class="keyword">import</span> com.aliyun.oss.OSS;</span><br><span class="line"><span class="keyword">import</span> com.aliyun.oss.OSSClientBuilder;</span><br><span class="line"><span class="keyword">import</span> com.aliyun.oss.OSSException;</span><br><span class="line"><span class="keyword">import</span> com.aliyun.oss.common.auth.CredentialsProviderFactory;</span><br><span class="line"><span class="keyword">import</span> com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;</span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayInputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 设置 Endpoint，以下示例以华东1（杭州）为例。</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">endpoint</span> <span class="operator">=</span> <span class="string">&quot;https://oss-cn-hangzhou.aliyuncs.com&quot;</span>;</span><br><span class="line">        <span class="comment">// 从环境变量中获取访问凭证。请确保已设置环境变量 OSS_ACCESS_KEY_ID 和 OSS_ACCESS_KEY_SECRET。</span></span><br><span class="line">        <span class="type">EnvironmentVariableCredentialsProvider</span> <span class="variable">credentialsProvider</span> <span class="operator">=</span> CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();</span><br><span class="line">        <span class="comment">// 填写 Bucket 名称，例如 examplebucket。</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">bucketName</span> <span class="operator">=</span> <span class="string">&quot;examplebucket&quot;</span>;</span><br><span class="line">        <span class="comment">// 填写 Object 完整路径，例如 exampledir/exampleobject.txt。路径中不能包含 Bucket 名称。</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">objectName</span> <span class="operator">=</span> <span class="string">&quot;exampledir/exampleobject.txt&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建 OSSClient 实例。</span></span><br><span class="line">        <span class="type">OSS</span> <span class="variable">ossClient</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OSSClientBuilder</span>().build(endpoint, credentialsProvider);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">content</span> <span class="operator">=</span> <span class="string">&quot;Hello OSS&quot;</span>;</span><br><span class="line">            <span class="comment">// 上传对象到 OSS。</span></span><br><span class="line">            ossClient.putObject(bucketName, objectName, <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(content.getBytes()));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (OSSException oe) &#123;</span><br><span class="line">            <span class="comment">// 捕获 OSS 异常。</span></span><br><span class="line">            System.out.println(<span class="string">&quot;Caught an OSSException, which means your request made it to OSS, &quot;</span></span><br><span class="line">                    + <span class="string">&quot;but was rejected with an error response for some reason.&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;Error Message:&quot;</span> + oe.getErrorMessage());</span><br><span class="line">            System.out.println(<span class="string">&quot;Error Code:&quot;</span> + oe.getErrorCode());</span><br><span class="line">            System.out.println(<span class="string">&quot;Request ID:&quot;</span> + oe.getRequestId());</span><br><span class="line">            System.out.println(<span class="string">&quot;Host ID:&quot;</span> + oe.getHostId());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClientException ce) &#123;</span><br><span class="line">            <span class="comment">// 捕获客户端异常。</span></span><br><span class="line">            System.out.println(<span class="string">&quot;Caught a ClientException, which means the client encountered &quot;</span></span><br><span class="line">                    + <span class="string">&quot;a serious internal problem while trying to communicate with OSS, &quot;</span></span><br><span class="line">                    + <span class="string">&quot;such as not being able to access the network.&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;Error Message:&quot;</span> + ce.getMessage());</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (ossClient != <span class="literal">null</span>) &#123;</span><br><span class="line">                ossClient.shutdown();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://wfyn.github.io">马朋坤</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://wfyn.github.io/2024/08/26/%E9%98%BF%E9%87%8COSS/">https://wfyn.github.io/2024/08/26/阿里OSS/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wfyn.github.io" target="_blank">轨迹</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/SpringBoot/">SpringBoot</a><a class="post-meta__tags" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%8E%A5%E5%8F%A3/">第三方接口</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/08/29/spring%E6%95%B4%E5%90%88poi/" title="SpringBoot整合poi实现对文档编辑并转为pdf"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SpringBoot整合poi实现对文档编辑并转为pdf</div></div></a></div><div class="next-post pull-right"><a href="/2024/08/20/SpringBoot%E5%90%84%E7%A7%8D%E6%B3%A8%E8%A7%A3/" title="SpringBoot各种注解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SpringBoot各种注解</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/09/01/SpringBoot%E6%95%B4%E5%90%88%E7%99%BE%E5%BA%A6%E4%BA%91%E8%BA%AB%E4%BB%BD%E8%AF%86%E5%88%AB/" title="springboot整合百度云身份识别"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-01</div><div class="title">springboot整合百度云身份识别</div></div></a></div><div><a href="/2023/09/20/SpringBoot%E5%88%A9%E7%94%A8AOP%E5%AE%9E%E7%8E%B0%E8%AE%B0%E5%BD%95%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%20-%20%E5%89%AF%E6%9C%AC/" title="SpringBoot利用AOP实现记录操作日志"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-20</div><div class="title">SpringBoot利用AOP实现记录操作日志</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">马朋坤</div><div class="author-info__description">有多少爱可以重来</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wfyn"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wfyn" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1613828539@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站点与2023年9月17日开始建造,并在逐渐完善中...</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/03/SpringBoot%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" title="springboot异常处理">springboot异常处理</a><time datetime="2025-07-03T13:36:53.528Z" title="发表于 2025-07-03 21:36:53">2025-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/01/SpringBoot%E6%95%B4%E5%90%88%E7%99%BE%E5%BA%A6%E4%BA%91%E8%BA%AB%E4%BB%BD%E8%AF%86%E5%88%AB/" title="springboot整合百度云身份识别">springboot整合百度云身份识别</a><time datetime="2024-09-01T15:28:28.000Z" title="发表于 2024-09-01 23:28:28">2024-09-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/uniapp%E6%95%B4%E5%90%88%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E7%9F%A2%E9%87%8F%E5%9B%BE%E6%A0%87/" title="uniapp整合阿里巴巴矢量图标库">uniapp整合阿里巴巴矢量图标库</a><time datetime="2024-08-29T13:44:04.000Z" title="发表于 2024-08-29 21:44:04">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/spring%E6%95%B4%E5%90%88poi/" title="SpringBoot整合poi实现对文档编辑并转为pdf">SpringBoot整合poi实现对文档编辑并转为pdf</a><time datetime="2024-08-29T13:10:05.000Z" title="发表于 2024-08-29 21:10:05">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/26/%E9%98%BF%E9%87%8COSS/" title="阿里云OSS">阿里云OSS</a><time datetime="2024-08-26T14:49:16.000Z" title="发表于 2024-08-26 22:49:16">2024-08-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/images/bg2.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By 马朋坤</div><div class="footer_custom_text">彼此交换喜悲,爱的多的人总先掉眼泪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

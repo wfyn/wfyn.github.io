@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Collectors API | 轨迹</title><meta name="author" content="马朋坤"><meta name="copyright" content="马朋坤"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Collectors API 是 Java 中用于收集（collecting）流元素到各种数据结构的工具类。它提供了丰富的静态方法来支持将流元素收集到列表、集合、映射等不同类型的数据结构中。这些方法可以与流的 collect 方法一起使用，用于生成最终的结果。 下面是一些常用的 Collectors API 的用法示例： 1. toList()将流中的元素收集到一个列表中。 示例： javaLis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Collectors API">
+<meta property="og:url" content="https://wfyn.github.io/2024/05/26/Collectors/index.html">
+<meta property="og:site_name" content="轨迹">
+<meta property="og:description" content="Collectors API 是 Java 中用于收集（collecting）流元素到各种数据结构的工具类。它提供了丰富的静态方法来支持将流元素收集到列表、集合、映射等不同类型的数据结构中。这些方法可以与流的 collect 方法一起使用，用于生成最终的结果。 下面是一些常用的 Collectors API 的用法示例： 1. toList()将流中的元素收集到一个列表中。 示例： javaLis">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wfyn.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2024-05-26T09:42:51.000Z">
+<meta property="article:modified_time" content="2024-05-26T10:01:49.000Z">
+<meta property="article:author" content="马朋坤">
+<meta property="article:tag" content="collectors">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wfyn.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wfyn.github.io/2024/05/26/Collectors/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: ,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Collectors API',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-05-26 18:01:49'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/bg2.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="轨迹"><span class="site-name">轨迹</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Collectors API</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-26T09:42:51.000Z" title="发表于 2024-05-26 17:42:51">2024-05-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-26T10:01:49.000Z" title="更新于 2024-05-26 18:01:49">2024-05-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java/">java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Collectors API"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>Collectors</strong> API 是 Java 中用于收集（collecting）流元素到各种数据结构的工具类。它提供了丰富的静态方法来支持将流元素收集到列表、集合、映射等不同类型的数据结构中。这些方法可以与流的 <code>collect</code> 方法一起使用，用于生成最终的结果。</p>
+<p>下面是一些常用的 <code>Collectors</code> API 的用法示例：</p>
+<h3 id="1-toList"><a href="#1-toList" class="headerlink" title="1. toList()"></a>1. <code>toList()</code></h3><p>将流中的元素收集到一个列表中。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">javaList&lt;String&gt; names = Stream.of(<span class="string">&quot;John&quot;</span>, <span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;Emily&quot;</span>)</span><br><span class="line">                           .collect(Collectors.toList());</span><br><span class="line"><span class="comment">// 结果为 [&quot;John&quot;, &quot;Alice&quot;, &quot;Bob&quot;, &quot;Emily&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-toSet"><a href="#2-toSet" class="headerlink" title="2. toSet()"></a>2. <code>toSet()</code></h3><p>将流中的元素收集到一个集合中。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">javaSet&lt;String&gt; uniqueNames = Stream.of(<span class="string">&quot;John&quot;</span>, <span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;Alice&quot;</span>)</span><br><span class="line">                                .collect(Collectors.toSet());</span><br><span class="line"><span class="comment">// 结果为 &#123;&quot;John&quot;, &quot;Alice&quot;, &quot;Bob&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-toMap"><a href="#3-toMap" class="headerlink" title="3. toMap()"></a>3. <code>toMap()</code></h3><p>将流中的元素收集到一个映射中，可以指定键和值的映射关系。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">javaMap&lt;String, Integer&gt; nameLengthMap = Stream.of(<span class="string">&quot;John&quot;</span>, <span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;Emily&quot;</span>)</span><br><span class="line">                                           .collect(Collectors.toMap(Function.identity(), String::length));</span><br><span class="line"><span class="comment">// 结果为 &#123;&quot;John&quot;=4, &quot;Alice&quot;=5, &quot;Bob&quot;=3, &quot;Emily&quot;=5&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-joining"><a href="#4-joining" class="headerlink" title="4. joining()"></a>4. <code>joining()</code></h3><p>将流中的元素连接成一个字符串。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">javaString</span> <span class="variable">allNames</span> <span class="operator">=</span> Stream.of(<span class="string">&quot;John&quot;</span>, <span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;Emily&quot;</span>)</span><br><span class="line">                        .collect(Collectors.joining(<span class="string">&quot;, &quot;</span>));</span><br><span class="line"><span class="comment">// 结果为 &quot;John, Alice, Bob, Emily&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-groupingBy"><a href="#5-groupingBy" class="headerlink" title="5. groupingBy()"></a>5. <code>groupingBy()</code></h3><p>根据指定的分类函数对流中的元素进行分组。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">javaMap&lt;Integer, List&lt;String&gt;&gt; namesByLength = Stream.of(<span class="string">&quot;John&quot;</span>, <span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;Emily&quot;</span>)</span><br><span class="line">                                                 .collect(Collectors.groupingBy(String::length));</span><br><span class="line"><span class="comment">// 结果为 &#123;3=[&quot;Bob&quot;], 4=[&quot;John&quot;], 5=[&quot;Alice&quot;, &quot;Emily&quot;]&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-partitioningBy"><a href="#6-partitioningBy" class="headerlink" title="6. partitioningBy()"></a>6. <code>partitioningBy()</code></h3><p>根据给定的条件将流中的元素分成两组。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">javaMap&lt;Boolean, List&lt;String&gt;&gt; partitionedNames = Stream.of(<span class="string">&quot;John&quot;</span>, <span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;Emily&quot;</span>)</span><br><span class="line">                                         .collect(Collectors.partitioningBy(s -&gt; s.length() &gt; <span class="number">3</span>));</span><br><span class="line"><span class="comment">// 结果为 &#123;false=[&quot;Bob&quot;], true=[&quot;John&quot;, &quot;Alice&quot;, &quot;Emily&quot;]&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-counting"><a href="#7-counting" class="headerlink" title="7. counting()"></a>7. <code>counting()</code></h3><p>计算流中元素的个数。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">javalong</span> <span class="variable">count</span> <span class="operator">=</span> Stream.of(<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;grape&quot;</span>)</span><br><span class="line">                   .collect(Collectors.counting());</span><br><span class="line"><span class="comment">// 结果为 4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="8-averagingInt"><a href="#8-averagingInt" class="headerlink" title="8. averagingInt()"></a>8. <code>averagingInt()</code></h3><p>计算流中整数类型元素的平均值。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">javadouble</span> <span class="variable">averageLength</span> <span class="operator">=</span> Stream.of(<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;grape&quot;</span>)</span><br><span class="line">                             .collect(Collectors.averagingInt(String::length));</span><br><span class="line"><span class="comment">// 结果为 5.25 (所有单词长度之和除以单词个数)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="9-summarizingInt"><a href="#9-summarizingInt" class="headerlink" title="9. summarizingInt()"></a>9. <code>summarizingInt()</code></h3><p>对流中的整数类型元素进行汇总统计，包括计数、总和、平均值、最大值和最小值。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">javaIntSummaryStatistics</span> <span class="variable">statistics</span> <span class="operator">=</span> Stream.of(<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;grape&quot;</span>)</span><br><span class="line">                                       .collect(Collectors.summarizingInt(String::length));</span><br><span class="line"><span class="comment">// 结果为 IntSummaryStatistics&#123;count=4, sum=21, min=5, average=5.250000, max=6&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="10-joining"><a href="#10-joining" class="headerlink" title="10. joining()"></a>10. <code>joining()</code></h3><p>将流中的元素连接成一个字符串，可以指定连接符、前缀和后缀。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">javaString</span> <span class="variable">concatenated</span> <span class="operator">=</span> Stream.of(<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;grape&quot;</span>)</span><br><span class="line">                            .collect(Collectors.joining(<span class="string">&quot;, &quot;</span>, <span class="string">&quot;[&quot;</span>, <span class="string">&quot;]&quot;</span>));</span><br><span class="line"><span class="comment">// 结果为 &quot;[apple, banana, orange, grape]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="11-mapping"><a href="#11-mapping" class="headerlink" title="11. mapping()"></a>11. <code>mapping()</code></h3><p>对流中的元素进行转换，并对转换结果进行收集。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">javaList&lt;String&gt; upperCaseNames = Stream.of(<span class="string">&quot;John&quot;</span>, <span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;Emily&quot;</span>)</span><br><span class="line">                                   .collect(Collectors.mapping(String::toUpperCase, Collectors.toList()));</span><br><span class="line"><span class="comment">// 结果为 [&quot;JOHN&quot;, &quot;ALICE&quot;, &quot;BOB&quot;, &quot;EMILY&quot;]</span></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://wfyn.github.io">马朋坤</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://wfyn.github.io/2024/05/26/Collectors/">https://wfyn.github.io/2024/05/26/Collectors/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wfyn.github.io" target="_blank">轨迹</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/collectors/">collectors</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/26/Stream%E6%B5%81%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" title="Stream 流常用方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Stream 流常用方法</div></div></a></div><div class="next-post pull-right"><a href="/2024/05/24/javaSE1/" title="java基本类型和包装类"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">java基本类型和包装类</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">马朋坤</div><div class="author-info__description">有多少爱可以重来</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wfyn"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wfyn" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1613828539@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站点与2023年9月17日开始建造,并在逐渐完善中...</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/03/SpringBoot%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" title="springboot异常处理">springboot异常处理</a><time datetime="2025-07-03T13:36:53.528Z" title="发表于 2025-07-03 21:36:53">2025-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/01/SpringBoot%E6%95%B4%E5%90%88%E7%99%BE%E5%BA%A6%E4%BA%91%E8%BA%AB%E4%BB%BD%E8%AF%86%E5%88%AB/" title="springboot整合百度云身份识别">springboot整合百度云身份识别</a><time datetime="2024-09-01T15:28:28.000Z" title="发表于 2024-09-01 23:28:28">2024-09-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/uniapp%E6%95%B4%E5%90%88%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E7%9F%A2%E9%87%8F%E5%9B%BE%E6%A0%87/" title="uniapp整合阿里巴巴矢量图标库">uniapp整合阿里巴巴矢量图标库</a><time datetime="2024-08-29T13:44:04.000Z" title="发表于 2024-08-29 21:44:04">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/spring%E6%95%B4%E5%90%88poi/" title="SpringBoot整合poi实现对文档编辑并转为pdf">SpringBoot整合poi实现对文档编辑并转为pdf</a><time datetime="2024-08-29T13:10:05.000Z" title="发表于 2024-08-29 21:10:05">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/26/%E9%98%BF%E9%87%8COSS/" title="阿里云OSS">阿里云OSS</a><time datetime="2024-08-26T14:49:16.000Z" title="发表于 2024-08-26 22:49:16">2024-08-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/images/bg2.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By 马朋坤</div><div class="footer_custom_text">彼此交换喜悲,爱的多的人总先掉眼泪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

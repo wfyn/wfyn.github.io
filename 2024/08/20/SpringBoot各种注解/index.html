@@ -1,0 +1,407 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SpringBoot各种注解 | 轨迹</title><meta name="author" content="马朋坤"><meta name="copyright" content="马朋坤"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 底层注解以下是统一格式的注解说明，涵盖 Spring Boot 中的主要注解及其用途、示例和配置： 1.1 基础注解@SpringBootApplication 说明: 这是一个复合注解，包含了 @Configuration、@EnableAutoConfiguration 和 @ComponentScan。它是启动 Spring Boot 应用的入口注解。  示例: @SpringBoot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot各种注解">
+<meta property="og:url" content="https://wfyn.github.io/2024/08/20/SpringBoot%E5%90%84%E7%A7%8D%E6%B3%A8%E8%A7%A3/index.html">
+<meta property="og:site_name" content="轨迹">
+<meta property="og:description" content="1. 底层注解以下是统一格式的注解说明，涵盖 Spring Boot 中的主要注解及其用途、示例和配置： 1.1 基础注解@SpringBootApplication 说明: 这是一个复合注解，包含了 @Configuration、@EnableAutoConfiguration 和 @ComponentScan。它是启动 Spring Boot 应用的入口注解。  示例: @SpringBoot">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wfyn.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2024-08-20T09:24:12.000Z">
+<meta property="article:modified_time" content="2024-08-29T13:38:55.000Z">
+<meta property="article:author" content="马朋坤">
+<meta property="article:tag" content="springboot">
+<meta property="article:tag" content="注解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wfyn.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wfyn.github.io/2024/08/20/SpringBoot%E5%90%84%E7%A7%8D%E6%B3%A8%E8%A7%A3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: ,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SpringBoot各种注解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-08-29 21:38:55'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/bg2.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="轨迹"><span class="site-name">轨迹</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SpringBoot各种注解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-20T09:24:12.000Z" title="发表于 2024-08-20 17:24:12">2024-08-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-29T13:38:55.000Z" title="更新于 2024-08-29 21:38:55">2024-08-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java/">java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SpringBoot各种注解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-底层注解"><a href="#1-底层注解" class="headerlink" title="1. 底层注解"></a>1. 底层注解</h2><p>以下是统一格式的注解说明，涵盖 Spring Boot 中的主要注解及其用途、示例和配置：</p>
+<h3 id="1-1-基础注解"><a href="#1-1-基础注解" class="headerlink" title="1.1 基础注解"></a>1.1 基础注解</h3><h4 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication"></a><code>@SpringBootApplication</code></h4><ul>
+<li><p><strong>说明</strong>: 这是一个复合注解，包含了 <code>@Configuration</code>、<code>@EnableAutoConfiguration</code> 和 <code>@ComponentScan</code>。它是启动 Spring Boot 应用的入口注解。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(MyApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="Configuration"><a href="#Configuration" class="headerlink" title="@Configuration"></a><code>@Configuration</code></h4><ul>
+<li><p><strong>说明</strong>: 用于定义 Spring 配置类，表示该类包含一个或多个 <code>@Bean</code> 方法，用于定义 Bean。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MyService <span class="title function_">myService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MyService</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="Component"><a href="#Component" class="headerlink" title="@Component"></a><code>@Component</code></h4><ul>
+<li><p><strong>说明</strong>: 表示一个 Spring 管理的组件，通常用于自动扫描和注册 Bean。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyComponent</span> &#123;</span><br><span class="line">    <span class="comment">// Component implementation</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="Bean"><a href="#Bean" class="headerlink" title="@Bean"></a><code>@Bean</code></h4><ul>
+<li><p><strong>说明</strong>: 用于在配置类中定义一个 Bean。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MyService <span class="title function_">myService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MyService</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="2-1-配置属性注解"><a href="#2-1-配置属性注解" class="headerlink" title="2.1 配置属性注解"></a>2.1 配置属性注解</h3><h4 id="EnableConfigurationProperties"><a href="#EnableConfigurationProperties" class="headerlink" title="@EnableConfigurationProperties"></a><code>@EnableConfigurationProperties</code></h4><ul>
+<li><p><strong>说明</strong>: 启用对 <code>@ConfigurationProperties</code> 注解的支持，允许 Spring Boot 自动将配置文件中的属性映射到 Bean 的字段中。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(MyProperties.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(MyApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;my&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyProperties</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getters and setters</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置文件 <code>application.properties</code>：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">my.name</span>=<span class="string">John Doe</span></span><br><span class="line"><span class="attr">my.age</span>=<span class="string">30</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="ConfigurationProperties"><a href="#ConfigurationProperties" class="headerlink" title="@ConfigurationProperties"></a><code>@ConfigurationProperties</code></h4><ul>
+<li><p><strong>说明</strong>: 用于将配置文件中的属性绑定到 Java 类上，通常和 <code>@EnableConfigurationProperties</code> 一起使用。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;my&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyProperties</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getters and setters</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置文件 <code>application.properties</code>：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">my.name</span>=<span class="string">John Doe</span></span><br><span class="line"><span class="attr">my.age</span>=<span class="string">30</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="3-1条件化配置注解"><a href="#3-1条件化配置注解" class="headerlink" title="3. 1条件化配置注解"></a>3. 1条件化配置注解</h3><h4 id="Condition"><a href="#Condition" class="headerlink" title="@Condition"></a><code>@Condition</code></h4><ul>
+<li><p><strong>说明</strong>: <code>@Condition</code> 是一个用于条件化配置的注解。它通常配合 <code>@Conditional</code> 使用，用于在特定条件下启用或禁用配置类或 Bean。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(name = &quot;my.feature.enabled&quot;, havingValue = &quot;true&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FeatureConfiguration</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MyFeature <span class="title function_">myFeature</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MyFeature</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置文件中的条件：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">my.feature.enabled</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="Import"><a href="#Import" class="headerlink" title="@Import"></a><code>@Import</code></h4><ul>
+<li><p><strong>说明</strong>: 用于将其他配置类导入当前配置类中。这使得可以在不同的配置类中组织和管理 Bean 定义。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import(AdditionalConfig.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainConfig</span> &#123;</span><br><span class="line">    <span class="comment">// Main configuration</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AdditionalConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> AnotherService <span class="title function_">anotherService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnotherService</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="AutoConfiguration"><a href="#AutoConfiguration" class="headerlink" title="@AutoConfiguration"></a><code>@AutoConfiguration</code></h4><ul>
+<li><p><strong>说明</strong>: 这是 Spring Boot 的核心注解之一，自动配置类可以帮助 Spring Boot 根据类路径中的库、项目的其他 Bean 定义等来自动配置应用程序。</p>
+</li>
+<li><p><strong>示例</strong>: 通常不需要显式使用该注解，因为 Spring Boot 启动类中的 <code>@SpringBootApplication</code> 注解已经包含了 <code>@EnableAutoConfiguration</code>。</p>
+</li>
+</ul>
+<hr>
+<h3 id="4-1-条件性创建-Bean"><a href="#4-1-条件性创建-Bean" class="headerlink" title="4.1 条件性创建 Bean"></a>4.1 条件性创建 Bean</h3><h4 id="Conditional-和-ConditionalOnProperty"><a href="#Conditional-和-ConditionalOnProperty" class="headerlink" title="@Conditional 和 @ConditionalOnProperty"></a><code>@Conditional</code> 和 <code>@ConditionalOnProperty</code></h4><ul>
+<li><p><strong>说明</strong>: <code>@Conditional</code> 是一个更底层的注解，允许基于不同条件创建 Bean。<code>@ConditionalOnProperty</code> 是常用的条件注解之一，用于基于配置文件中的属性来条件性地创建 Bean。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(name = &quot;my.feature.enabled&quot;, havingValue = &quot;true&quot;, matchIfMissing = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConditionalConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> ConditionalService <span class="title function_">conditionalService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConditionalService</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<p>以上注解是 Spring Boot 中常用的底层注解，涵盖了应用启动、配置、条件化和组件管理等功能。</p>
+<h3 id="2-IOC-注解"><a href="#2-IOC-注解" class="headerlink" title="2. IOC 注解"></a>2. IOC 注解</h3><p>这些注解用于控制反转（IoC），主要涉及 Bean 的管理和依赖注入。</p>
+<ul>
+<li><p><strong><code>@Autowired</code></strong>  </p>
+<ul>
+<li><strong>说明</strong>: 自动注入依赖项。Spring 会根据类型自动注入对应的 Bean。</li>
+<li><strong>示例</strong>:<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyComponent</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MyService myService;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// use myService</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><code>@Qualifier</code></strong>  </p>
+<ul>
+<li><strong>说明</strong>: 与 <code>@Autowired</code> 一起使用，指定要注入的具体 Bean，解决多个 Bean 的歧义问题。</li>
+<li><strong>示例</strong>:<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyComponent</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Qualifier(&quot;specificService&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> MyService myService;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// use myService</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><code>@Resource</code></strong>  </p>
+<ul>
+<li><p><strong>说明</strong>: 根据名称注入 Bean，主要用于根据 Bean 的名字注入。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  <span class="meta">@Component</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyComponent</span> &#123;</span><br><span class="line">      <span class="meta">@Resource(name = &quot;myService&quot;)</span></span><br><span class="line">      <span class="keyword">private</span> MyService myService;</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// use myService</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><code>@PostConstruct</code></strong>  </p>
+<ul>
+<li><p><strong>说明</strong>: 用于标记一个初始化方法，在依赖注入完成后调用。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyComponent</span> &#123;</span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// initialization logic</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><code>@PreDestroy</code></strong>  </p>
+<ul>
+<li><strong>说明</strong>: 用于标记一个销毁方法，在 Bean 被销毁之前调用。</li>
+<li><strong>示例</strong>:<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyComponent</span> &#123;</span><br><span class="line">    <span class="meta">@PreDestroy</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// cleanup logic</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Controller-参数注解"><a href="#3-Controller-参数注解" class="headerlink" title="3. Controller 参数注解"></a>3. Controller 参数注解</h3><p>这些注解主要用于处理请求并传递参数给控制器的方法。</p>
+<ul>
+<li><p><strong><code>@RestController</code></strong>  </p>
+<ul>
+<li><p><strong>说明</strong>: 是 <code>@Controller</code> 和 <code>@ResponseBody</code> 的组合，表示这个类是一个控制器，并且所有的方法都以 JSON 或 XML 的形式返回数据。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyController</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/hello&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello, World!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>@RequestMapping</code></strong>  </p>
+<ul>
+<li><strong>说明</strong>: 用于定义请求的 URL 路径和方法类型（GET、POST 等）。</li>
+<li><strong>示例</strong>:<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyController</span> &#123;</span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/greet&quot;, method = RequestMethod.GET)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">greet</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Greetings!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><code>@GetMapping</code></strong>  </p>
+<ul>
+<li><strong>说明</strong>: 用于处理 HTTP GET 请求的快捷方式。</li>
+<li><strong>示例</strong>:<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyController</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/hello&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello, World!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><code>@PostMapping</code></strong>  </p>
+<ul>
+<li><strong>说明</strong>: 用于处理 HTTP POST 请求的快捷方式。</li>
+<li><strong>示例</strong>:<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyController</span> &#123;</span><br><span class="line">    <span class="meta">@PostMapping(&quot;/submit&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">submit</span><span class="params">(<span class="meta">@RequestBody</span> MyData data)</span> &#123;</span><br><span class="line">        <span class="comment">// handle data</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Data submitted!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><code>@RequestParam</code></strong>  </p>
+<ul>
+<li><p><strong>说明</strong>: 用于从请求参数中提取值，并将其绑定到方法参数。</p>
+</li>
+<li><p><strong>示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  <span class="meta">@RestController</span></span><br><span class="line">  <span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyController</span> &#123;</span><br><span class="line">      <span class="meta">@GetMapping(&quot;/greet&quot;)</span></span><br><span class="line">      <span class="keyword">public</span> String <span class="title function_">greet</span><span class="params">(<span class="meta">@RequestParam(name = &quot;name&quot;, defaultValue = &quot;Guest&quot;)</span> String name)</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="string">&quot;Hello, &quot;</span> + name + <span class="string">&quot;!&quot;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><code>@RequestPart</code></strong> 是 Spring Framework 中用于处理 multipart&#x2F;form-data 请求的注解，通常用于文件上传或复杂的表单数据。它通常与 <code>@PostMapping</code> 或 <code>@RequestMapping</code> 一起使用，用于将请求体中的部分数据绑定到方法参数上。这个注解使得处理文件和表单数据变得更加简单和直接。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
+<li><strong>文件上传</strong>: <code>@RequestPart</code> 可以用来绑定上传的文件。</li>
+<li><strong>复杂表单数据</strong>: 如果请求体包含多个部分，例如文件和 JSON 数据，<code>@RequestPart</code> 可以用来处理这些不同的部分。</li>
+</ol>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><p>假设我们有一个上传文件和一些其他表单数据的场景。我们可以定义一个 REST 控制器方法来处理这个请求。</p>
+<h4 id="上传文件和额外的表单数据"><a href="#上传文件和额外的表单数据" class="headerlink" title="上传文件和额外的表单数据"></a>上传文件和额外的表单数据</h4></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">javaimport org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestPart;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileUploadController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/upload&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">handleFileUpload</span><span class="params">(</span></span><br><span class="line"><span class="params">            <span class="meta">@RequestPart(&quot;file&quot;)</span> MultipartFile file,</span></span><br><span class="line"><span class="params">            <span class="meta">@RequestPart(&quot;description&quot;)</span> String description)</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 处理文件</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> file.getOriginalFilename();</span><br><span class="line">        <span class="type">long</span> <span class="variable">fileSize</span> <span class="operator">=</span> file.getSize();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理描述</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Description: &quot;</span> + description);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 返回响应</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;File &quot;</span> + fileName + <span class="string">&quot; with size &quot;</span> + fileSize + <span class="string">&quot; and description &quot;</span> + description + <span class="string">&quot; uploaded successfully!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong><code>@PathVariable</code></strong>  </p>
+<ul>
+<li><strong>说明</strong>: 用于从 URL 路径中提取值，并将其绑定到方法参数。</li>
+<li><strong>示例</strong>:<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyController</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/user/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUser</span><span class="params">(<span class="meta">@PathVariable</span> String id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;User ID: &quot;</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><code>@RequestBody</code></strong>  </p>
+<ul>
+<li><strong>说明</strong>: 用于将请求体中的数据绑定到方法参数上，通常用于处理 POST 请求中的 JSON 数据。</li>
+<li><strong>示例</strong>:<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyController</span> &#123;</span><br><span class="line">    <span class="meta">@PostMapping(&quot;/create&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">create</span><span class="params">(<span class="meta">@RequestBody</span> MyData data)</span> &#123;</span><br><span class="line">        <span class="comment">// handle data</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Data created!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><code>@ResponseBody</code></strong>  </p>
+<ul>
+<li><strong>说明</strong>: 表示方法的返回值应该直接绑定到 HTTP 响应体中，通常用于返回 JSON 或 XML 数据。</li>
+<li><strong>示例</strong>:<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyController</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/data&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="keyword">public</span> MyData <span class="title function_">getData</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MyData</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="4-Spring-MVC与Spring-Boot的区别"><a href="#4-Spring-MVC与Spring-Boot的区别" class="headerlink" title="4. Spring MVC与Spring Boot的区别"></a>4. Spring MVC与Spring Boot的区别</h3><p><strong>Spring MVC</strong> 和 <strong>Spring Boot</strong> 都是Spring框架的一部分，但它们各自的用途和功能有所不同。</p>
+<ul>
+<li><p><strong>Spring MVC</strong>:</p>
+<ul>
+<li><strong>定义</strong>: 是Spring框架的一部分，主要用于构建Web应用程序。它基于MVC（Model-View-Controller）设计模式，提供了一个分层的架构来开发Web应用。</li>
+<li><strong>功能</strong>: 提供了控制器、视图解析器、数据绑定等功能。它专注于Web层的开发，并且需要开发者自行配置各种组件和设置。</li>
+<li><strong>配置</strong>: 配置通常较为繁琐，涉及大量的XML配置文件或者Java配置类。</li>
+<li><strong>应用</strong>: 适用于需要灵活控制的传统Web应用项目，特别是那些需要手动配置各种组件的项目。</li>
+</ul>
+</li>
+<li><p><strong>Spring Boot</strong>:</p>
+<ul>
+<li><strong>定义</strong>: 是一个基于Spring的开源框架，用于简化Spring应用的创建和部署。它提供了一种开箱即用的解决方案，减少了大量的配置和样板代码。</li>
+<li><strong>功能</strong>: 提供了自动配置、内嵌服务器（如Tomcat、Jetty）、生产级别的特性（如监控和管理），使开发人员可以专注于业务逻辑，而不必担心基础设施的配置。</li>
+<li><strong>配置</strong>: 提供了默认配置和自动配置，减少了手动配置的需求。使用<code>application.properties</code>或<code>application.yml</code>文件进行配置，使得项目设置更加简洁。</li>
+<li><strong>应用</strong>: 适用于快速开发和部署，尤其是微服务架构和新建项目，因为它可以减少项目启动时间和开发过程中的配置复杂性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-Autowired-Qualifier-和-Resource的区别"><a href="#5-Autowired-Qualifier-和-Resource的区别" class="headerlink" title="5. @Autowired, @Qualifier 和 @Resource的区别"></a>5. @Autowired, @Qualifier 和 @Resource的区别</h3><p>这些注解都是用于依赖注入的，但它们在使用和功能上有所不同：</p>
+<ul>
+<li><p><strong>@Autowired</strong>:</p>
+<ul>
+<li><strong>定义</strong>: 是Spring框架提供的注解，用于自动注入Bean。</li>
+<li><strong>功能</strong>: 自动根据类型注入Bean。如果Spring容器中有多个符合条件的Bean，可能会导致<code>NoUniqueBeanDefinitionException</code>异常。</li>
+<li><strong>使用</strong>: 可以用于构造函数、方法、字段等。可选地结合<code>@Qualifier</code>使用，以指定注入的具体Bean。</li>
+</ul>
+</li>
+<li><p><strong>@Qualifier</strong>:</p>
+<ul>
+<li><strong>定义</strong>: 是Spring框架提供的注解，用于在使用<code>@Autowired</code>时，指定注入的Bean的名称。</li>
+<li><strong>功能</strong>: 解决<code>@Autowired</code>在存在多个候选Bean时的冲突问题。通过指定Bean的名称或ID，明确注入的目标。</li>
+<li><strong>使用</strong>: 必须和<code>@Autowired</code>一起使用，以提供明确的注入目标。</li>
+</ul>
+</li>
+<li><p><strong>@Resource</strong>:</p>
+<ul>
+<li><strong>定义</strong>: 是Java EE（也称为Jakarta EE）提供的注解，属于JSR-250规范的一部分，也可以在Spring中使用。</li>
+<li><strong>功能</strong>: 根据名称进行注入。它首先会尝试按名称注入，如果找不到对应的名称，则会按类型进行注入。</li>
+<li><strong>使用</strong>: 更偏向于按名称注入，并且不需要和其他注解（如<code>@Qualifier</code>）一起使用。它的行为与<code>@Autowired</code> + <code>@Qualifier</code>组合有一定相似性，但默认按名称注入，适用于需要根据名称进行注入的场景。</li>
+</ul>
+</li>
+</ul>
+<p><strong>总结</strong>:</p>
+<ul>
+<li><strong>@Autowired</strong>: 按类型自动注入，可以和<code>@Qualifier</code>配合使用。</li>
+<li><strong>@Qualifier</strong>: 用于指定具体的Bean，配合<code>@Autowired</code>使用。</li>
+<li><strong>@Resource</strong>: 按名称进行注入（如果没有找到按名称的Bean，则按类型进行注入）。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://wfyn.github.io">马朋坤</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://wfyn.github.io/2024/08/20/SpringBoot%E5%90%84%E7%A7%8D%E6%B3%A8%E8%A7%A3/">https://wfyn.github.io/2024/08/20/SpringBoot各种注解/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wfyn.github.io" target="_blank">轨迹</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/springboot/">springboot</a><a class="post-meta__tags" href="/tags/%E6%B3%A8%E8%A7%A3/">注解</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/08/26/%E9%98%BF%E9%87%8COSS/" title="阿里云OSS"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">阿里云OSS</div></div></a></div><div class="next-post pull-right"><a href="/2024/08/15/%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%9A%84/" title="SpringBoot3--&gt;springBoot2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SpringBoot3--&gt;springBoot2</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">马朋坤</div><div class="author-info__description">有多少爱可以重来</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wfyn"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wfyn" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1613828539@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站点与2023年9月17日开始建造,并在逐渐完善中...</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/03/SpringBoot%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" title="springboot异常处理">springboot异常处理</a><time datetime="2025-07-03T13:36:53.528Z" title="发表于 2025-07-03 21:36:53">2025-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/01/SpringBoot%E6%95%B4%E5%90%88%E7%99%BE%E5%BA%A6%E4%BA%91%E8%BA%AB%E4%BB%BD%E8%AF%86%E5%88%AB/" title="springboot整合百度云身份识别">springboot整合百度云身份识别</a><time datetime="2024-09-01T15:28:28.000Z" title="发表于 2024-09-01 23:28:28">2024-09-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/uniapp%E6%95%B4%E5%90%88%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E7%9F%A2%E9%87%8F%E5%9B%BE%E6%A0%87/" title="uniapp整合阿里巴巴矢量图标库">uniapp整合阿里巴巴矢量图标库</a><time datetime="2024-08-29T13:44:04.000Z" title="发表于 2024-08-29 21:44:04">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/spring%E6%95%B4%E5%90%88poi/" title="SpringBoot整合poi实现对文档编辑并转为pdf">SpringBoot整合poi实现对文档编辑并转为pdf</a><time datetime="2024-08-29T13:10:05.000Z" title="发表于 2024-08-29 21:10:05">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/26/%E9%98%BF%E9%87%8COSS/" title="阿里云OSS">阿里云OSS</a><time datetime="2024-08-26T14:49:16.000Z" title="发表于 2024-08-26 22:49:16">2024-08-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/images/bg2.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By 马朋坤</div><div class="footer_custom_text">彼此交换喜悲,爱的多的人总先掉眼泪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

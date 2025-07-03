@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Linux 常用命令 | 轨迹</title><meta name="author" content="马朋坤"><meta name="copyright" content="马朋坤"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、基本命令1.1 关机和重启关机    shutdown -h now        立刻关机    shutdown -h 5        5分钟后关机    poweroff            立刻关机重启    shutdown -r now        立刻重启    shutdown -r 5        5分钟后重启    reboot                立刻重">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 常用命令">
+<meta property="og:url" content="https://wfyn.github.io/2024/06/02/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="轨迹">
+<meta property="og:description" content="一、基本命令1.1 关机和重启关机    shutdown -h now        立刻关机    shutdown -h 5        5分钟后关机    poweroff            立刻关机重启    shutdown -r now        立刻重启    shutdown -r 5        5分钟后重启    reboot                立刻重">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wfyn.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2024-06-02T12:30:15.000Z">
+<meta property="article:modified_time" content="2024-06-02T12:31:48.000Z">
+<meta property="article:author" content="马朋坤">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="常用命令">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wfyn.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wfyn.github.io/2024/06/02/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: ,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux 常用命令',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-06-02 20:31:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/bg7.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="轨迹"><span class="site-name">轨迹</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux 常用命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-02T12:30:15.000Z" title="发表于 2024-06-02 20:30:15">2024-06-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-02T12:31:48.000Z" title="更新于 2024-06-02 20:31:48">2024-06-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/linux/">linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux 常用命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、基本命令"><a href="#一、基本命令" class="headerlink" title="一、基本命令"></a>一、基本命令</h2><h3 id="1-1-关机和重启"><a href="#1-1-关机和重启" class="headerlink" title="1.1 关机和重启"></a>1.1 关机和重启</h3><p>关机<br>    shutdown -h now        立刻关机<br>    shutdown -h 5        5分钟后关机<br>    poweroff            立刻关机<br>重启<br>    shutdown -r now        立刻重启<br>    shutdown -r 5        5分钟后重启<br>    reboot                立刻重启</p>
+<h3 id="1-2-帮助命令"><a href="#1-2-帮助命令" class="headerlink" title="1.2 帮助命令"></a>1.2 帮助命令</h3><p>–help命令<br>  shutdown –help：<br>  ifconfig  –help：查看网卡信息</p>
+<p>man命令（命令说明书）<br>  man shutdown<br>  注意：man shutdown打开命令说明书之后，使用按键q退出</p>
+<p>二、目录操作命令</p>
+<h3 id="2-1-目录切换-cd"><a href="#2-1-目录切换-cd" class="headerlink" title="2.1 目录切换 cd"></a>2.1 目录切换 cd</h3><p>命令：cd 目录  （change directory） </p>
+<p>cd &#x2F;        切换到根目录<br>cd &#x2F;usr        切换到根目录下的usr目录<br>cd ..&#x2F;        切换到上一级目录 或者  cd ..<br>cd ~        切换到home目录<br>cd -        切换到上次访问的目录</p>
+<h3 id="2-2-目录查看-ls-al"><a href="#2-2-目录查看-ls-al" class="headerlink" title="2.2 目录查看 ls [-al]"></a>2.2 目录查看 ls [-al]</h3><p>命令：ls [-al]    （list  -all  longs）</p>
+<p>ls                查看当前目录下的所有目录和文件<br>ls -a            查看当前目录下的所有目录和文件（包括隐藏的文件）<br>ls -l 或 ll       列表查看当前目录下的所有目录和文件（列表查看，显示更多信息）<br>ls &#x2F;dir            查看指定目录下的所有目录和文件   如：ls &#x2F;usr</p>
+<h3 id="2-3-目录操作【增，删，改，查】"><a href="#2-3-目录操作【增，删，改，查】" class="headerlink" title="2.3 目录操作【增，删，改，查】"></a>2.3 目录操作【增，删，改，查】</h3><h4 id="2-3-1-创建目录【增】-mkdir"><a href="#2-3-1-创建目录【增】-mkdir" class="headerlink" title="2.3.1 创建目录【增】 mkdir"></a>2.3.1 创建目录【增】 mkdir</h4><p>命令：mkdir 目录  （make directory）</p>
+<p>mkdir    aaa            在当前目录下创建一个名为aaa的目录<br>mkdir    &#x2F;usr&#x2F;aaa    在指定目录下创建一个名为aaa的目录</p>
+<h4 id="2-3-2-删除目录或文件【删】rm"><a href="#2-3-2-删除目录或文件【删】rm" class="headerlink" title="2.3.2 删除目录或文件【删】rm"></a>2.3.2 删除目录或文件【删】rm</h4><p>命令：rm [-rf] 目录</p>
+<p>删除文件：<br>rm 文件        删除当前目录下的文件<br>rm -f 文件    删除当前目录的的文件（不询问）</p>
+<p>删除目录：<br>rm -r aaa    递归删除当前目录下的aaa目录<br>rm -rf aaa    递归删除当前目录下的aaa目录（不询问）</p>
+<p>全部删除：<br>rm -rf *    将当前目录下的所有目录和文件全部删除<br>rm -rf &#x2F;*    【自杀命令！慎用！慎用！慎用！】将根目录下的所有文件全部删除</p>
+<p>注意：rm不仅可以删除目录，也可以删除其他文件或压缩包，为了方便大家的记忆，无论删除任何目录或文件，都直接使用 rm -rf 目录&#x2F;文件&#x2F;压缩包</p>
+<h4 id="2-3-3-目录修改【改】mv-和-cp"><a href="#2-3-3-目录修改【改】mv-和-cp" class="headerlink" title="2.3.3 目录修改【改】mv 和 cp"></a>2.3.3 目录修改【改】mv 和 cp</h4><h4 id="一、重命名目录"><a href="#一、重命名目录" class="headerlink" title="一、重命名目录"></a>一、重命名目录</h4><p>​    命令：mv 当前目录  新目录<br>​    例如：mv aaa bbb    将目录aaa改为bbb<br>​    注意：mv的语法不仅可以对目录进行重命名而且也可以对各种文件，压缩包等进行    重命名的操作</p>
+<h4 id="二、剪切目录"><a href="#二、剪切目录" class="headerlink" title="二、剪切目录"></a>二、剪切目录</h4><p>​    命令：mv 目录名称 目录的新位置 (move )<br>​    示例：将&#x2F;usr&#x2F;tmp目录下的aaa目录剪切到 &#x2F;usr目录下面     mv &#x2F;usr&#x2F;tmp&#x2F;aaa &#x2F;usr<br>​    注意：mv语法不仅可以对目录进行剪切操作，对文件和压缩包等都可执行剪切操作</p>
+<h4 id="三、拷贝目录"><a href="#三、拷贝目录" class="headerlink" title="三、拷贝目录"></a>三、拷贝目录</h4><p>​    命令：cp -r 目录名称 目录拷贝的目标位置   -r代表递归 (copy)<br>​    示例：将&#x2F;usr&#x2F;tmp目录下的aaa目录复制到 &#x2F;usr目录下面     cp &#x2F;usr&#x2F;tmp&#x2F;aaa  &#x2F;usr<br>​    注意：cp命令不仅可以拷贝目录还可以拷贝文件，压缩包等，拷贝文件和压缩包时不    用写-r递归</p>
+<h4 id="2-3-4-搜索目录【查】find"><a href="#2-3-4-搜索目录【查】find" class="headerlink" title="2.3.4 搜索目录【查】find"></a>2.3.4 搜索目录【查】find</h4><p>命令：find 目录 参数 文件名称<br>示例：find &#x2F;usr&#x2F;tmp -name ‘a*’    查找&#x2F;usr&#x2F;tmp目录下的所有以a开头的目录或文件</p>
+<h2 id="三、文件操作命令"><a href="#三、文件操作命令" class="headerlink" title="三、文件操作命令"></a>三、文件操作命令</h2><h2 id="3-1-文件操作【增，删，改，查】"><a href="#3-1-文件操作【增，删，改，查】" class="headerlink" title="3.1 文件操作【增，删，改，查】"></a>3.1 文件操作【增，删，改，查】</h2><h3 id="3-1-1-新建文件【增】touch"><a href="#3-1-1-新建文件【增】touch" class="headerlink" title="3.1.1 新建文件【增】touch"></a>3.1.1 新建文件【增】touch</h3><p>命令：touch 文件名<br>示例：在当前目录创建一个名为aa.txt的文件        touch  aa.txt</p>
+<h3 id="3-1-2-删除文件-【删】-rm"><a href="#3-1-2-删除文件-【删】-rm" class="headerlink" title="3.1.2 删除文件 【删】 rm"></a>3.1.2 删除文件 【删】 rm</h3><p>命令：rm -rf 文件名 (remove      force)</p>
+<h3 id="3-1-3-修改文件【改】-vi或vim"><a href="#3-1-3-修改文件【改】-vi或vim" class="headerlink" title="3.1.3 修改文件【改】 vi或vim"></a>3.1.3 修改文件【改】 vi或vim</h3><p>【vi编辑器的3种模式】<br>    基本上vi可以分为三种状态，分别是命令模式（command mode）、插入模式（Insert mode）和底行模式（last line mode），各模式的功能区分如下：</p>
+<h5 id="1-命令行模式command-mode）"><a href="#1-命令行模式command-mode）" class="headerlink" title="1) 命令行模式command mode）"></a>1) 命令行模式command mode）</h5><p>​      控制屏幕光标的移动，字符、字或行的删除，查找，移动复制某区段及进入Insert mode下，或者到 last line mode。<br>​      命令行模式下的常用命令：<br>​      【1】控制光标移动：↑，↓，j<br>​      【2】删除当前行：dd<br>​      【3】查找：&#x2F;字符<br>​      【4】进入编辑模式：i o a<br>​      【5】进入底行模式：:<br>​      </p>
+<h5 id="2-编辑模式（Insert-mode）"><a href="#2-编辑模式（Insert-mode）" class="headerlink" title="2) 编辑模式（Insert mode）"></a>2) 编辑模式（Insert mode）</h5><p>​      只有在Insert mode下，才可以做文字输入，按「ESC」键可回到命令行模式。<br>​      编辑模式下常用命令：<br>​      【1】ESC 退出编辑模式到命令行模式；<br>​      </p>
+<h5 id="3-底行模式（last-line-mode）"><a href="#3-底行模式（last-line-mode）" class="headerlink" title="3) 底行模式（last line mode）"></a>3) 底行模式（last line mode）</h5><p>​     将文件保存或退出vi，也可以设置编辑环境，如寻找字符串、列出行号……等。<br>​     底行模式下常用命令：<br>​     【1】退出编辑：   :q<br>​     【2】强制退出：   :q!<br>​     【3】保存并退出：  :wq</p>
+<h5 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h5><p>命令：vi 文件名<br>示例：打开当前目录下的aa.txt文件     vi aa.txt 或者 vim aa.txt</p>
+<p>注意：使用vi编辑器打开文件后，并不能编辑，因为此时处于命令模式，点击键盘i&#x2F;a&#x2F;o进入编辑模式。</p>
+<h5 id="编辑文件"><a href="#编辑文件" class="headerlink" title="编辑文件"></a>编辑文件</h5><p>使用vi编辑器打开文件后点击按键：i ，a或者o即可进入编辑模式。</p>
+<p>i:在光标所在字符前开始插入<br>a:在光标所在字符后开始插入<br>o:在光标所在行的下面另起一新行插入</p>
+<h5 id="保存或者取消编辑"><a href="#保存或者取消编辑" class="headerlink" title="保存或者取消编辑"></a>保存或者取消编辑</h5><p>保存文件：</p>
+<p>第一步：ESC  进入命令行模式<br>第二步：:     进入底行模式<br>第三步：wq     保存并退出编辑</p>
+<h5 id="取消编辑："><a href="#取消编辑：" class="headerlink" title="取消编辑："></a>取消编辑：</h5><p>第一步：ESC  进入命令行模式<br>第二步：:     进入底行模式<br>第三步：q!     撤销本次修改并退出编辑</p>
+<h3 id="3-1-4-文件的查看【查】"><a href="#3-1-4-文件的查看【查】" class="headerlink" title="3.1.4 文件的查看【查】"></a>3.1.4 文件的查看【查】</h3><p>文件的查看命令：cat&#x2F;more&#x2F;less&#x2F;tail</p>
+<p>cat：看最后一屏</p>
+<p>示例：使用cat查看&#x2F;etc&#x2F;sudo.conf文件，只能显示最后一屏内容<br>cat sudo.conf</p>
+<p>more：百分比显示</p>
+<p>示例：使用more查看&#x2F;etc&#x2F;sudo.conf文件，可以显示百分比，回车可以向下一行，空格可以向下一页，q可以退出查看<br>more sudo.conf</p>
+<p>less：翻页查看</p>
+<p>示例：使用less查看&#x2F;etc&#x2F;sudo.conf文件，可以使用键盘上的PgUp和PgDn向上    和向下翻页，q结束查看<br>less sudo.conf</p>
+<p>tail：指定行数或者动态查看</p>
+<p>示例：使用tail -10 查看&#x2F;etc&#x2F;sudo.conf文件的后10行，Ctrl+C结束<br>tail -10 sudo.conf</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://wfyn.github.io">马朋坤</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://wfyn.github.io/2024/06/02/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">https://wfyn.github.io/2024/06/02/linux常用命令/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wfyn.github.io" target="_blank">轨迹</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux/">linux</a><a class="post-meta__tags" href="/tags/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">常用命令</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/04/%E9%9B%86%E5%90%88%E5%9B%BE%E8%A7%A3/" title="集合图解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">集合图解</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/01/JavaSE%E9%AB%98%E7%BA%A7%20%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6List&amp;Set/" title="集合框架List&amp;Set"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">集合框架List&amp;Set</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">马朋坤</div><div class="author-info__description">有多少爱可以重来</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wfyn"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wfyn" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1613828539@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站点与2023年9月17日开始建造,并在逐渐完善中...</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/03/SpringBoot%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" title="springboot异常处理">springboot异常处理</a><time datetime="2025-07-03T13:36:53.528Z" title="发表于 2025-07-03 21:36:53">2025-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/01/SpringBoot%E6%95%B4%E5%90%88%E7%99%BE%E5%BA%A6%E4%BA%91%E8%BA%AB%E4%BB%BD%E8%AF%86%E5%88%AB/" title="springboot整合百度云身份识别">springboot整合百度云身份识别</a><time datetime="2024-09-01T15:28:28.000Z" title="发表于 2024-09-01 23:28:28">2024-09-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/uniapp%E6%95%B4%E5%90%88%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E7%9F%A2%E9%87%8F%E5%9B%BE%E6%A0%87/" title="uniapp整合阿里巴巴矢量图标库">uniapp整合阿里巴巴矢量图标库</a><time datetime="2024-08-29T13:44:04.000Z" title="发表于 2024-08-29 21:44:04">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/spring%E6%95%B4%E5%90%88poi/" title="SpringBoot整合poi实现对文档编辑并转为pdf">SpringBoot整合poi实现对文档编辑并转为pdf</a><time datetime="2024-08-29T13:10:05.000Z" title="发表于 2024-08-29 21:10:05">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/26/%E9%98%BF%E9%87%8COSS/" title="阿里云OSS">阿里云OSS</a><time datetime="2024-08-26T14:49:16.000Z" title="发表于 2024-08-26 22:49:16">2024-08-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/images/bg7.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By 马朋坤</div><div class="footer_custom_text">彼此交换喜悲,爱的多的人总先掉眼泪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SpringBoot自动配置原理 | 轨迹</title><meta name="author" content="马朋坤"><meta name="copyright" content="马朋坤"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.@SpringBootApplication复合注解的作用 2.自动配置原理2.1@EnableAutoConfiguration 2.2AutoConfigurationImportSelector被加载 2.3 调用 List getCandidateConfigurations(AnnotationMetadata metadata, AnnotationAttributes attri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot自动配置原理">
+<meta property="og:url" content="https://wfyn.github.io/2024/08/14/SpringBootB/index.html">
+<meta property="og:site_name" content="轨迹">
+<meta property="og:description" content="1.@SpringBootApplication复合注解的作用 2.自动配置原理2.1@EnableAutoConfiguration 2.2AutoConfigurationImportSelector被加载 2.3 调用 List getCandidateConfigurations(AnnotationMetadata metadata, AnnotationAttributes attri">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wfyn.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2024-08-14T01:06:51.000Z">
+<meta property="article:modified_time" content="2024-08-15T01:00:59.000Z">
+<meta property="article:author" content="马朋坤">
+<meta property="article:tag" content="spring-boot">
+<meta property="article:tag" content="底层原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wfyn.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wfyn.github.io/2024/08/14/SpringBootB/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: ,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SpringBoot自动配置原理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-08-15 09:00:59'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/default_top_img.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="轨迹"><span class="site-name">轨迹</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SpringBoot自动配置原理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-14T01:06:51.000Z" title="发表于 2024-08-14 09:06:51">2024-08-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-15T01:00:59.000Z" title="更新于 2024-08-15 09:00:59">2024-08-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SpringBoot自动配置原理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-SpringBootApplication复合注解的作用"><a href="#1-SpringBootApplication复合注解的作用" class="headerlink" title="1.@SpringBootApplication复合注解的作用"></a>1.@SpringBootApplication复合注解的作用</h2><p><img src="/../images/SpringBootApplication.png"></p>
+<h2 id="2-自动配置原理"><a href="#2-自动配置原理" class="headerlink" title="2.自动配置原理"></a>2.自动配置原理</h2><h3 id="2-1-EnableAutoConfiguration"><a href="#2-1-EnableAutoConfiguration" class="headerlink" title="2.1@EnableAutoConfiguration"></a>2.1@EnableAutoConfiguration</h3><p><img src="/../images/EnableAutoConfiguration.png"></p>
+<h3 id="2-2AutoConfigurationImportSelector被加载"><a href="#2-2AutoConfigurationImportSelector被加载" class="headerlink" title="2.2AutoConfigurationImportSelector被加载"></a>2.2AutoConfigurationImportSelector被加载</h3><p><img src="/../images/process.png"></p>
+<h3 id="2-3-调用-List-getCandidateConfigurations-AnnotationMetadata-metadata-AnnotationAttributes-attributes"><a href="#2-3-调用-List-getCandidateConfigurations-AnnotationMetadata-metadata-AnnotationAttributes-attributes" class="headerlink" title="2.3 调用 List getCandidateConfigurations(AnnotationMetadata metadata, AnnotationAttributes attributes)"></a>2.3 调用 List<String> getCandidateConfigurations(AnnotationMetadata metadata, AnnotationAttributes attributes)</h3><p>加载META-INF&#x2F;spring.factories中的文件</p>
+<p>以及META-INF&#x2F;spring&#x2F;%s.imports中的文件</p>
+<img src="../images/get.png" style="zoom:100%;" />
+
+
+
+<h2 id="3-DispatcherServletAutoConfiguration自动配置分析"><a href="#3-DispatcherServletAutoConfiguration自动配置分析" class="headerlink" title="3.DispatcherServletAutoConfiguration自动配置分析"></a>3.DispatcherServletAutoConfiguration自动配置分析</h2><p><img src="/../images/dis.png"></p>
+<h3 id="DispatcherServletAutoConfiguration中含有"><a href="#DispatcherServletAutoConfiguration中含有" class="headerlink" title="DispatcherServletAutoConfiguration中含有"></a>DispatcherServletAutoConfiguration中含有</h3><h3 id="3-1DispatcherServletConfiguration类"><a href="#3-1DispatcherServletConfiguration类" class="headerlink" title="3.1DispatcherServletConfiguration类"></a>3.1DispatcherServletConfiguration类</h3><p><img src="/../images/dis1.png"></p>
+<h4 id="3-1-1-DispatcherServletConfiguration-类注解的详细解释："><a href="#3-1-1-DispatcherServletConfiguration-类注解的详细解释：" class="headerlink" title="3.1.1 DispatcherServletConfiguration 类注解的详细解释："></a><code>3.1.1 DispatcherServletConfiguration</code> 类注解的详细解释：</h4><ol>
+<li><p><strong><code>@Configuration(proxyBeanMethods = false)</code></strong>:</p>
+<ul>
+<li>这个注解表示 <code>DispatcherServletConfiguration</code> 是一个 Spring 配置类。</li>
+<li><code>proxyBeanMethods = false</code> 表示该配置类中的 <code>@Bean</code> 方法不会被代理。意味着 Spring 不会使用 CGLIB 代理来缓存这些方法的结果（通常是为了优化性能）</li>
+</ul>
+</li>
+<li><p><strong><code>@Conditional(DefaultDispatcherServletCondition.class)</code></strong>:</p>
+<ul>
+<li>注解指示 <code>DispatcherServletConfiguration</code> 类的条件性加载。只有当 <code>DefaultDispatcherServletCondition</code> 条件满足时，这个配置类才会生效。<code>DefaultDispatcherServletCondition</code> 是一个自定义条件类，用于决定是否创建该配置类的 bean。这个条件类通常实现了 <code>Condition</code> 接口，并定义了逻辑来判断是否满足生效条件。</li>
+</ul>
+</li>
+<li><p><strong><code>@ConditionalOnClass(ServletRegistration.class)</code></strong>:</p>
+<ul>
+<li>表示 <code>DispatcherServletConfiguration</code> 类仅在类路径中存在 <code>ServletRegistration</code> 类的情况下才会生效。<code>ServletRegistration</code> 是 Servlet API 中的一个类，因此这个条件确保了配置类仅在存在 Servlet API 的环境中被加载。它通常用于确保只有在包含 Servlet 相关类的情况下才会应用此配置。</li>
+</ul>
+</li>
+<li><p><strong><code>@EnableConfigurationProperties(WebMvcProperties.class)</code></strong>:</p>
+<ul>
+<li><p>这个注解启用了 <code>WebMvcProperties</code> 类作为配置属性的支持。这意味着 Spring Boot 会将 <code>WebMvcProperties</code> 类中的属性从配置文件（如 <code>application.properties</code> 或 <code>application.yml</code>）中绑定到 <code>WebMvcProperties</code> 实例中。它允许该配置类访问和使用这些属性</p>
+</li>
+<li><p>前缀为spring.mvc</p>
+<p><img src="/../images/dis3.png"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="综合条件"><a href="#综合条件" class="headerlink" title="综合条件"></a>综合条件</h3><p><code>DispatcherServletConfiguration</code> 类的生效条件是：</p>
+<ol>
+<li>**<code>DefaultDispatcherServletCondition</code>**：自定义条件类 <code>DefaultDispatcherServletCondition</code> 的条件必须满足。这个条件类通常用于实现特定的逻辑来决定是否加载该配置类。</li>
+<li><strong><code>ServletRegistration</code> 类存在</strong>：类路径中必须包含 <code>ServletRegistration</code> 类。即应用必须使用 Servlet 规范，并且 Servlet API 的相关依赖必须存在。</li>
+<li><strong><code>WebMvcProperties</code> 配置支持</strong>：虽然 <code>@EnableConfigurationProperties(WebMvcProperties.class)</code> 不是生效条件的直接部分，但它指示在配置类加载时，会将配置属性绑定到 <code>WebMvcProperties</code> 实例中。</li>
+</ol>
+<p>综合来说，<code>DispatcherServletConfiguration</code> 仅在满足 <code>DefaultDispatcherServletCondition</code> 条件且类路径中包含 <code>ServletRegistration</code> 类时才会生效。这通常意味着应用是一个基于 Servlet 的 Web 应用，并且 <code>DefaultDispatcherServletCondition</code> 条件是为了进一步精确控制配置类的加载时机。</p>
+<h4 id="3-1-2-Bean"><a href="#3-1-2-Bean" class="headerlink" title="3.1.2 @Bean"></a>3.1.2 @Bean</h4><p><img src="/../images/image-20240814210816547.png" alt="image-20240814210816547"></p>
+<p>注册了disppatcherServlet ，不可被替换</p>
+<p><img src="/../images/image-20240814210854587.png" alt="image-20240814210854587"></p>
+<p>注册了multipartResplver，可以被替换</p>
+<h3 id="3-2DispatcherServletRegistrationConfiguration类"><a href="#3-2DispatcherServletRegistrationConfiguration类" class="headerlink" title="3.2DispatcherServletRegistrationConfiguration类"></a>3.2DispatcherServletRegistrationConfiguration类</h3><p><img src="/../images/dis2.png"></p>
+<h3 id="生效条件分析"><a href="#生效条件分析" class="headerlink" title="生效条件分析"></a>生效条件分析</h3><ol>
+<li><strong><code>@Configuration(proxyBeanMethods = false)</code></strong><ul>
+<li>这是一个标记注解，表示这是一个配置类，用于定义 Spring Bean。</li>
+<li><code>proxyBeanMethods = false</code> 表示不生成 CGLIB 代理，这是默认设置，主要用于提高性能。</li>
+</ul>
+</li>
+<li><strong><code>@Conditional(DispatcherServletRegistrationCondition.class)</code></strong><ul>
+<li>这个注解表示该配置类的生效依赖于 <code>DispatcherServletRegistrationCondition</code> 的条件。</li>
+<li><code>DispatcherServletRegistrationCondition</code> 是一个自定义的条件类，只有当其 <code>matches</code> 方法返回 <code>true</code> 时，这个配置类才会生效。这个条件类的具体实现取决于业务需求，通常用于根据某些条件（如环境、配置等）决定是否应用这个配置。</li>
+</ul>
+</li>
+<li><strong><code>@ConditionalOnClass(ServletRegistration.class)</code></strong><ul>
+<li>这个注解表示当类路径中存在 <code>ServletRegistration</code> 类时，这个配置类才会生效。</li>
+<li><code>ServletRegistration</code> 是 Servlet 的注册相关类，通常是与 Servlet API 相关的类，这意味着当项目中有 Servlet API 相关的依赖时，这个配置类才会被应用。</li>
+</ul>
+</li>
+<li><strong><code>@EnableConfigurationProperties(WebMvcProperties.class)</code></strong><ul>
+<li>这个注解用于启用对 <code>WebMvcProperties</code> 的配置属性支持。</li>
+<li><code>WebMvcProperties</code> 是一个配置属性类，用于从配置文件中读取 Web MVC 相关的配置（如 Servlet 路径、启动加载等）。</li>
+</ul>
+</li>
+<li><strong><code>@Import(DispatcherServletConfiguration.class)</code></strong><ul>
+<li>这个注解用于导入其他配置类。</li>
+<li><code>DispatcherServletConfiguration</code> 可能包含与 <code>DispatcherServlet</code> 相关的其他配置，它将会被导入到当前配置类中。</li>
+</ul>
+</li>
+<li><strong><code>@Bean(name = DEFAULT_DISPATCHER_SERVLET_REGISTRATION_BEAN_NAME)</code></strong><ul>
+<li>这是一个 Spring Bean 定义方法，表示返回一个 <code>DispatcherServletRegistrationBean</code> 实例。</li>
+<li><code>@ConditionalOnBean</code> 注解用于判断只有在 <code>DispatcherServlet</code> Bean 存在时才创建这个 Bean。</li>
+</ul>
+</li>
+<li><strong><code>@ConditionalOnBean(value = DispatcherServlet.class, name = DEFAULT_DISPATCHER_SERVLET_BEAN_NAME)</code></strong><ul>
+<li>这个注解表示只有当 <code>DispatcherServlet</code> Bean 存在并且其名称匹配 <code>DEFAULT_DISPATCHER_SERVLET_BEAN_NAME</code> 时，才会创建 <code>dispatcherServletRegistration</code> 方法中的 Bean。</li>
+<li><code>DispatcherServlet</code> 是 Spring MVC 的核心 Servlet，当它存在时才会进行注册。</li>
+</ul>
+</li>
+</ol>
+<p><strong>这段配置类的生效条件是：</strong></p>
+<ul>
+<li>项目中存在 <code>ServletRegistration</code> 类。</li>
+<li><code>DispatcherServletRegistrationCondition</code> 条件类的 <code>matches</code> 方法返回 <code>true</code>。</li>
+<li><code>WebMvcProperties</code> 类可用（由 <code>@EnableConfigurationProperties</code> 提供支持）。</li>
+<li><code>DispatcherServlet</code> Bean 存在，并且其名称匹配 <code>DEFAULT_DISPATCHER_SERVLET_BEAN_NAME</code>。</li>
+</ul>
+<h2 id="4-HttpEncodingAutoConfiguration"><a href="#4-HttpEncodingAutoConfiguration" class="headerlink" title="4.HttpEncodingAutoConfiguration"></a>4.HttpEncodingAutoConfiguration</h2><p><img src="/../images/encode.png"></p>
+<h3 id="4-1-配置类何时生效？"><a href="#4-1-配置类何时生效？" class="headerlink" title="4.1. 配置类何时生效？"></a>4.1. 配置类何时生效？</h3><p><code>HttpEncodingAutoConfiguration</code> 配置类的生效条件如下：</p>
+<ul>
+<li><p><strong>条件注解</strong>：</p>
+<ul>
+<li><p><code>@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)</code></p>
+<p>这个注解确保只有在 Servlet 类型的 web 应用中才会生效。</p>
+</li>
+<li><p>@ConditionalOnClass(CharacterEncodingFilter.class)&#96;</p>
+</li>
+</ul>
+<p>  这个注解检查 <code>CharacterEncodingFilter</code> 类是否存在于类路径中。如果存在，配置类才会生效。</p>
+<ul>
+<li><p><code>@ConditionalOnProperty(prefix = &quot;server.servlet.encoding&quot;, value = &quot;enabled&quot;, matchIfMissing = true)</code>：</p>
+<p>这个注解指定了一个属性前缀和属性值（<code>server.servlet.encoding.enabled</code>）。如果该属性存在并且值为 <code>true</code>，或该属性未设置，则配置类生效。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>作用</strong>： 配置类会在启动时检查这些条件。如果所有条件都满足，那么 Spring Boot 会自动配置 <code>CharacterEncodingFilter</code> 和 <code>LocaleCharsetMappingsCustomizer</code>。</p>
+</li>
+</ul>
+<h3 id="4-2-开启配置绑定了什么？使用什么前缀来操作的？"><a href="#4-2-开启配置绑定了什么？使用什么前缀来操作的？" class="headerlink" title="4.2. 开启配置绑定了什么？使用什么前缀来操作的？"></a>4.2. 开启配置绑定了什么？使用什么前缀来操作的？</h3><ul>
+<li><p><strong>绑定的属性</strong>：</p>
+<ul>
+<li><code>Encoding</code> 对象：配置类通过 <code>ServerProperties</code> 的 <code>getServlet().getEncoding()</code> 方法获取 <code>Encoding</code> 配置。这个对象封装了字符编码的配置，例如字符集和强制编码设置。</li>
+</ul>
+</li>
+<li><p><strong>前缀</strong>：</p>
+<ul>
+<li><p>配置类使用的前缀是</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server.servlet.encoding</span><br></pre></td></tr></table></figure>
+
+<p>。例如：</p>
+<ul>
+<li><code>server.servlet.encoding.charset</code>：定义字符集。</li>
+<li><code>server.servlet.encoding.force-request</code>：是否强制请求编码。</li>
+<li><code>server.servlet.encoding.force-response</code>：是否强制响应编码。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-Bean-注入了哪些组件？能否自己替换？"><a href="#4-3-Bean-注入了哪些组件？能否自己替换？" class="headerlink" title="4.3. @Bean 注入了哪些组件？能否自己替换？"></a>4.3. <code>@Bean</code> 注入了哪些组件？能否自己替换？</h3><ul>
+<li><p><strong>注入的组件</strong>：</p>
+<ul>
+<li><pre><code>CharacterEncodingFilter：
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  - 通过 `@Bean` 注解，配置类创建并返回一个 `CharacterEncodingFilter` 实例，该实例是 `OrderedCharacterEncodingFilter` 的子类。</span><br><span class="line">  - 该过滤器用于设置 HTTP 请求和响应的字符编码。</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  LocaleCharsetMappingsCustomizer：</span><br></pre></td></tr></table></figure>
+
+- 另一个 `@Bean` 注入的组件。它实现了 `WebServerFactoryCustomizer` 接口，允许自定义 web 服务器的 locale 和 charset 映射。
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>是否可以替换</strong>：</p>
+<ul>
+<li>**<code>CharacterEncodingFilter</code>**：<ul>
+<li>可以通过定义一个具有相同 bean 名称或类型的自定义 <code>CharacterEncodingFilter</code> 来替换。</li>
+<li>由于 <code>@ConditionalOnMissingBean</code> 注解，只有在没有其他 <code>CharacterEncodingFilter</code> bean 时才会创建默认的 <code>OrderedCharacterEncodingFilter</code>。</li>
+</ul>
+</li>
+<li>**<code>LocaleCharsetMappingsCustomizer</code>**：<ul>
+<li>可以通过定义一个自定义的 <code>WebServerFactoryCustomizer</code> bean 来替换。</li>
+<li>自定义实现可以调整 locale 和 charset 映射逻辑，允许开发者根据需求进行配置。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-静态资源的默认规则"><a href="#5-静态资源的默认规则" class="headerlink" title="5.静态资源的默认规则"></a>5.静态资源的默认规则</h2><p><img src="/../images/web33.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://wfyn.github.io">马朋坤</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://wfyn.github.io/2024/08/14/SpringBootB/">https://wfyn.github.io/2024/08/14/SpringBootB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wfyn.github.io" target="_blank">轨迹</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/spring-boot/">spring-boot</a><a class="post-meta__tags" href="/tags/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">底层原理</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/08/15/%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%9A%84/" title="SpringBoot3--&gt;springBoot2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SpringBoot3--&gt;springBoot2</div></div></a></div><div class="next-post pull-right"><a href="/2024/08/13/springBootA/" title="spring-boot依赖管理与底层注解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">spring-boot依赖管理与底层注解</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/08/13/springBootA/" title="spring-boot依赖管理与底层注解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-13</div><div class="title">spring-boot依赖管理与底层注解</div></div></a></div><div><a href="/2025/07/03/SpringBoot%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" title="springboot异常处理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-03</div><div class="title">springboot异常处理</div></div></a></div><div><a href="/2024/08/29/spring%E6%95%B4%E5%90%88poi/" title="SpringBoot整合poi实现对文档编辑并转为pdf"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-29</div><div class="title">SpringBoot整合poi实现对文档编辑并转为pdf</div></div></a></div><div><a href="/2024/08/15/%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%9A%84/" title="SpringBoot3--&gt;springBoot2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-15</div><div class="title">SpringBoot3--&gt;springBoot2</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">马朋坤</div><div class="author-info__description">有多少爱可以重来</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wfyn"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wfyn" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1613828539@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站点与2023年9月17日开始建造,并在逐渐完善中...</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/03/SpringBoot%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" title="springboot异常处理">springboot异常处理</a><time datetime="2025-07-03T13:36:53.528Z" title="发表于 2025-07-03 21:36:53">2025-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/01/SpringBoot%E6%95%B4%E5%90%88%E7%99%BE%E5%BA%A6%E4%BA%91%E8%BA%AB%E4%BB%BD%E8%AF%86%E5%88%AB/" title="springboot整合百度云身份识别">springboot整合百度云身份识别</a><time datetime="2024-09-01T15:28:28.000Z" title="发表于 2024-09-01 23:28:28">2024-09-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/uniapp%E6%95%B4%E5%90%88%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E7%9F%A2%E9%87%8F%E5%9B%BE%E6%A0%87/" title="uniapp整合阿里巴巴矢量图标库">uniapp整合阿里巴巴矢量图标库</a><time datetime="2024-08-29T13:44:04.000Z" title="发表于 2024-08-29 21:44:04">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/29/spring%E6%95%B4%E5%90%88poi/" title="SpringBoot整合poi实现对文档编辑并转为pdf">SpringBoot整合poi实现对文档编辑并转为pdf</a><time datetime="2024-08-29T13:10:05.000Z" title="发表于 2024-08-29 21:10:05">2024-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/26/%E9%98%BF%E9%87%8COSS/" title="阿里云OSS">阿里云OSS</a><time datetime="2024-08-26T14:49:16.000Z" title="发表于 2024-08-26 22:49:16">2024-08-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/default_top_img.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By 马朋坤</div><div class="footer_custom_text">彼此交换喜悲,爱的多的人总先掉眼泪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
